@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        /* Add your custom styles here */
+        body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Set minimum height to 100% of the viewport height */
+    margin: 0;
+}
+header {
+  background-color: #050531; /* Green background color */
+  color: #fff; /* White text color */
+  text-align: center;
+  padding: 15px 0; /* Adjusted padding for the header */
+  position: relative;
+  top: 0;
+  z-index: 999;
+  transition: background-color 0.3s;
+}
+
+h1 {
+  color: #ffcc00;
+  text-align: center;
+  margin: 0; /* Remove margin to match the "Sign Up" header */
+}
+.navbar {
+      overflow: hidden;
+      text-align: center;
+      padding: 15px;
+      margin-left: 0.3cm;
+      margin-right: 0.3cm;
+      border-top-left-radius: 0;
+      /* Rounded top-left corner */
+      border-top-right-radius: 0;
+      /* Rounded top-right corner */
+      border-bottom-left-radius: 10px;
+      /* Square bottom-left corner */
+      border-bottom-right-radius: 10px;
+      /* Square bottom-right corner */
+    }
+
+.container {
+    flex: 1; /* Make the container grow to fill available space */
+}
+
+footer {
+    margin-top: auto; /* Push the footer to the bottom */
+}
+
+        h2 {
+            color: #007bff;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .btn-view {
+            margin-top: 10px;
+        }
+
+        .reservation-table {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .selection-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .time-slot-list,
+        .court-list {
+            list-style: none;
+            padding: 0;
+            flex: 1;
+        }
+
+        .time-slot-item,
+        .court-item {
+            margin-bottom: 10px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .time-slot-item:hover,
+        .court-item:hover {
+            background-color: #f2f2f2;
+        }
+
+        .selected {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .footer-bar {
+        background-color: #001f3f;
+        height: 3px;
+        margin: 0;
+    }
+
+    /* Footer content styles */
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; /* Align items vertically in the center */
+    }
+
+    .footer-contact {
+        flex: 1;
+    }
+
+    .footer-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff; /* Text color added for better visibility */
+        margin-bottom: 5px; /* Adjusted margin for better spacing */
+    }
+
+    /* Contact details */
+    .footer-contact p {
+        font-size: 14px;
+        margin: 2px 0; /* Adjusted margin for better spacing */
+        color: #fff; /* Text color added for better visibility */
+    }
+
+    /* Copyright section */
+    .footer-copyright {
+        background-color: #001f3f;
+        color: #fff;
+        text-align: left;
+        font-size: 12px; /* Adjusted font size for copyright text */
+    }
+
+    /* Footer picture container */
+    .footer-picture-container {
+        text-align: right;
+        padding-top: 5px; /* Adjust as needed for spacing */
+    }
+
+    .footer-picture-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px; /* Add border-radius for rounded corners */
+    }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <h1>ADMIN PAGE</h1>
+      </header>
+
+    <div class="container">
+        <h2 class="mt-3 mb-3"></h2>
+
+        <form id="reservationForm">
+            <div class="form-row align-items-center">
+                <div class="col-auto">
+                    <label for="viewDate" class="sr-only">Select Date:</label>
+                    <input type="date" id="viewDate" name="view_date" class="form-control" required>
+                </div>
+
+                <div class="col-auto">
+                    <label for="sportType" class="sr-only">Select Sport Type:</label>
+                    <select id="sportType" name="sport_type" class="form-control" required>
+                        <option value="Badminton">Badminton</option>
+                        <option value="Squash">Squash</option>
+                        <option value="Tennis">Tennis</option>
+                    </select>
+                </div>
+
+                <div class="col-auto">
+                    <button type="button" class="btn btn-primary btn-view" onclick="viewReservations()">View Reservations</button>
+                    <button type="button" class="btn btn-primary btn-view" onclick="editReservation()">Edit Reservation</button>
+                    <button type="button" class="btn btn-primary btn-view" onclick="deleteReservation()">Delete Reservation</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="reservationTable" class="reservation-table">
+            <!-- Reservation table will be displayed here -->
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js scripts here -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // JavaScript code here
+    </script>
+
+    <footer style="background-color: #001f3f; margin: 0; padding: 0;">
+        <div class="footer-bar"></div>
+        <div class="footer-content" style="padding: 10px 1cm 10px 0;">
+            <div class="footer-contact">
+                <p class="footer-title" style="font-size: 16px; font-weight: bold; color: #fff; margin-left: 1cm;">SPORTS CENTRE</p>
+                <p style="font-size: 14px; color: #fff; margin-left: 1cm;">UNIVERSITI UTARA MALAYSIA </p>
+                <p style="font-size: 14px; color: #fff; margin-left: 1cm;">06010 Sintok</p>
+                <p style="font-size: 14px; color: #fff; margin-left: 1cm;">Kedah Darul Aman, Malaysia</p>
+                <p style="font-size: 14px; color: #fff; margin-left: 1cm;">&phone; +604-928 3560</p>
+            </div>
+    
+            <div class="footer-picture-container">
+                <img src="img/footer.png" alt="Footer Picture" title="Footer Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+            </div>
+        </div>
+    
+        <div class="footer-copyright" style="padding: 5px 1cm;">
+            <p style="margin: 0; font-size: 12px;">&copy; 2022 Universiti Utara Malaysia</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

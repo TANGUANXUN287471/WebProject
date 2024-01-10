@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Account</title>
+  <!-- Include your CSS stylesheets here -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+    }
+
+    .navbar {
+      overflow: hidden;
+      text-align: center;
+      padding: 15px;
+      margin-left: 0.3cm;
+      margin-right: 0.3cm;
+      border-top-left-radius: 0;
+      /* Rounded top-left corner */
+      border-top-right-radius: 0;
+      /* Rounded top-right corner */
+      border-bottom-left-radius: 10px;
+      /* Square bottom-left corner */
+      border-bottom-right-radius: 10px;
+      /* Square bottom-right corner */
+    }
+
+    header {
+      background-color: #050531;
+      /* Green background color */
+      color: #ffcc00;
+      /* White text color */
+      text-align: center;
+      padding: 20px 0;
+      position: relative;
+      top: 0;
+      z-index: 999;
+      transition: background-color 0.3s;
+      margin-bottom: 10px;
+      border-radius: 20px;
+      box-shadow: 0 0 100px rgba(0, 0, 0, 0.2);
+    }
+  
+
+    h1 {
+      color: #ffcc00;
+      text-align: center;
+    }
+
+    .container {
+      text-align: center;
+      margin-top: 100px;
+      margin-bottom: 10px;
+    }
+
+    .center-container {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .user-info-container {
+      width: 50%;
+      margin: 20px auto;
+      background-color: #ffffff;
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+    }
+
+    p {
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    button {
+      cursor: pointer;
+      margin: 5px;
+      /* Additional styles for the button, if needed */
+    }
+
+    .footer-bar {
+      background-color: #001f3f;
+      height: 3px;
+      margin: 0;
+    }
+
+    /* Footer content styles */
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /* Align items vertically in the center */
+    }
+
+    .footer-contact {
+      flex: 1;
+    }
+
+    .footer-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      /* Text color added for better visibility */
+      margin-bottom: 5px;
+      /* Adjusted margin for better spacing */
+    }
+
+    /* Contact details */
+    .footer-contact p {
+      font-size: 14px;
+      margin: 2px 0;
+      color: #fff;
+      margin-left: 1cm;
+      /* Move the left margin here */
+    }
+
+    /* Copyright section */
+    .footer-copyright {
+      background-color: #001f3f;
+      color: #fff;
+      text-align: left;
+      font-size: 12px;
+      /* Adjusted font size for copyright text */
+    }
+
+    /* Footer picture container */
+    .footer-picture-container {
+      text-align: right;
+      padding-top: 5px;
+      /* Adjust as needed for spacing */
+    }
+
+    .footer-picture-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      /* Add border-radius for rounded corners */
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Display user information -->
+  <header class="navbar">
+    <h1>View Your Account</h1>
+  </header>
+
+  <div class="center-container">
+    <div class="user-info-container">
+      <p><strong>Name:</strong> <span id="user_name"></span></p>
+      <p><strong>Matric No:</strong> <span id="user_matricNo"></span></p>
+      <p><strong>Phone No:</strong> <span id="user_phoneNo"></span></p>
+      <p><strong>Email:</strong> <span id="user_email"></span></p>
+    </div>
+
+    <!-- Buttons for updating and deleting profile -->
+    <div>
+      <input type="hidden" id="user_id" name="user_id" value="userID">
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          let currentIndex = 0;
+          const announcements = document.querySelectorAll('.announcement');
+          const totalAnnouncements = announcements.length;
+
+          // Get the userID from the URL
+          var userID = getParameterByName('userID');
+          console.log("UserID:", userID);
+
+          // Set the user_id value in the hidden input field
+          document.getElementById("user_id").value = userID;
+
+          console.log(userID);
+        });
+
+        // Function to get a parameter from the URL by name
+        function getParameterByName(name, url) {
+          if (!url) url = window.location.href;
+          name = name.replace(/[\[\]]/g, "\\$&");
+          var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+          if (!results) return null;
+          if (!results[2]) return '';
+          return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+      </script>
+      <button onclick="viewProfile()" class="btn btn-primary">View Profile</button>
+      <button onclick="navigateToIndex()" class="btn btn-primary">Back</button>
+    </div>
+  </div>
+
+  <!-- Include your additional HTML content and scripts here -->
+
+  <script>
+    // JavaScript functions for handling button actions
+
+    function viewProfile() {
+      // Get the user_id from the hidden input field
+      const userID = document.getElementById('user_id').value;
+
+      // Check if user_id is available
+      if (userID) {
+        // Create a FormData object and append the user_id
+        const formData = new FormData();
+        formData.append("user_id", userID);
+
+        // Create an AJAX request
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "php/user_read.php", true);
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            // Handle the successful response
+            try {
+              // Parse the JSON response
+              const userData = JSON.parse(xhr.responseText);
+
+              // Update the displayed information
+              document.getElementById('user_name').innerText = userData.name;
+              document.getElementById('user_matricNo').innerText = userData.matricNo;
+              document.getElementById('user_phoneNo').innerText = userData.phoneNo;
+              document.getElementById('user_email').innerText = userData.email;
+            } catch (error) {
+              console.error("Error parsing JSON: " + error);
+            }
+          } else {
+            // Handle errors
+            console.error("Error: " + xhr.statusText);
+          }
+        };
+        xhr.send(formData);
+      } else {
+        alert("UserID not provided.");
+      }
+    }
+
+    // Function to navigate to the index.html page
+    function navigateToIndex() {
+      const userID = document.getElementById('user_id').value;
+
+      // You can adjust the path to match the location of your index.html file
+      window.location.href = 'index.html?userID=' + userID;
+    }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+  <footer style="background-color: #001f3f; margin: 0; padding: 0;">
+    <div class="footer-bar"></div>
+    <div class="footer-content" style="padding: 10px 1cm 10px 0;">
+      <div class="footer-contact">
+        <p class="footer-title" style="font-size: 16px; font-weight: bold; color: #fff; margin-left: 1cm;">SPORTS CENTRE</p>
+        <p style="font-size: 14px; color: #fff; margin-left: 1cm;">UNIVERSITI UTARA MALAYSIA </p>
+        <p style="font-size: 14px; color: #fff; margin-left: 1cm;">06010 Sintok</p>
+        <p style="font-size: 14px; color: #fff; margin-left: 1cm;">Kedah Darul Aman, Malaysia</p>
+        <p style="font-size: 14px; color: #fff; margin-left: 1cm;">&phone; +604-928 3560</p>
+      </div>
+
+      <div class="footer-picture-container">
+        <img src="img/footer.png" alt="Footer Picture" title="Footer Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+      </div>
+    </div>
+
+    <div class="footer-copyright" style="padding: 5px 1cm;">
+      <p style="margin: 0; font-size: 12px;">&copy; 2022 Universiti Utara Malaysia</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

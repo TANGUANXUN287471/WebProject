@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: url('../page/img/register.jpeg');
+      margin: 0;
+    }
+
+    header {
+  background-color: #050531; /* Green background color */
+  color: #fff; /* White text color */
+  text-align: center;
+  padding: 15px 0; /* Adjusted padding for the header */
+  position: relative;
+  top: 0;
+  z-index: 999;
+  transition: background-color 0.3s;
+}
+
+h1 {
+  color: #ffcc00;
+  text-align: center;
+  margin: 0; /* Remove margin to match the "Sign Up" header */
+}
+
+.navbar {
+  background-color: #050531; /* Green background color */
+  overflow: hidden;
+  text-align: center;
+  padding: 15px;
+  margin-left: 3cm;
+  margin-right: 3cm;
+  border-top-left-radius: 0; /* Rounded top-left corner */
+  border-top-right-radius: 0; /* Rounded top-right corner */
+  border-bottom-left-radius: 10px; /* Square bottom-left corner */
+  border-bottom-right-radius: 10px; /* Square bottom-right corner */
+}
+
+    .navbar h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 20px auto; /* Updated margin for spacing below the navbar */
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      background: white;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #ffcc00;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+
+    .form-footer {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .form-footer a {
+      text-decoration: none;
+      color: #666;
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="navbar">
+  <h1>Court Reservation System</h1>
+</div>
+
+<div class="container">
+  <h1>SIGN UP</h1>
+  <form action="php/user_create.php" method="post">
+    <input type="text" name="user_matricNum" placeholder="Enter your matric number">
+    <input type="text" name="user_name" placeholder="Enter your Full name">
+    <input type="email" name="user_email" placeholder="Enter your email address">
+    <input type="text" name="user_phone" placeholder="Enter your phone number">
+    <input type="password" name="user_password" placeholder="Create a password">
+    <input type="password" name="confirm_password" placeholder="Confirm password">
+    <button type="submit">Sign up</button>
+  </form>
+  <div class="form-footer">
+    <p>Already have an account? <a href="login_page.html">Log in</a></p>
+  </div>
+</div>
+</body>
+
+</html>

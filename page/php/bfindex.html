@@ -1,0 +1,490 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Sports Court Reservation</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="apple-touch-icon" href="../icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+  <style>
+    /* Add your CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #001f3f;
+  color: white;
+  padding: 10px;
+}
+
+.navbar img {
+  width: 200px;
+  height: auto; /* Adjust as necessary for your logo */
+}
+
+.navbar a {
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  border: 2px solid transparent; /* Adds a transparent border to maintain layout on hover */
+  position: relative;
+  border-radius: 5px; /* Rounded corners */
+}
+
+.navbar a:hover {
+  background-color: #ffcc00; /* Black background on hover */
+  color: rgb(15, 1, 1);
+  border: 2px solid #fff; /* Adds a border on hover */
+}
+
+
+.navbar .button {
+  background-color: #f2f2f2;
+  color: #333;
+  border-radius: 50px; /* Rounded corners */
+  font-weight: bold;
+  display: inline-block;
+  padding: 10px 20px;
+  margin-left: 10px; /* Adjust margin for spacing */
+}
+
+.navbar .button.sign-up {
+  background-color: #4CAF50; /* Green background for sign up */
+  color: white;
+}
+
+.navbar .button.log-in {
+  background-color: #555; /* Darker background for log in */
+  color: white;
+}
+   /* Styles for the hero section */
+   .hero {
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  background: url('../img/sportscenter-01.png') no-repeat center center;
+  background-size: cover;
+  color: white;
+  padding: 160px;
+}
+
+.sports-image {
+  width: 100%;
+  height: auto;
+  opacity: 0; /* Make sure the default image is visible */
+  animation: imageFade 10s infinite alternate; /* Use alternate to make the animation go back and forth */
+}
+
+.sports-image-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0; /* Initially hide the second image */
+  width: 100%;
+  height: auto;
+}
+
+/* Keyframes for the fade animation */
+@keyframes imageFade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.hero:hover .sports-image {
+  animation: none; /* Stop the animation on hover */
+  opacity: 0; /* Hide the default image on hover */
+}
+
+.hero:hover .sports-image-hover {
+  opacity: 1; /* Show the second image on hover */
+}
+
+    .court-list {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+    }
+    .court-item {
+      width: 30%;
+      text-align: center;
+    }
+    .court-item a {
+      text-decoration: none;
+      color: inherit; /* Keeps the text color the same as the text outside the link */
+    }
+    .court-item img {
+      width: 100%; /* Makes the image responsive to the container width */
+      cursor: pointer; /* Changes the cursor to indicate it's clickable */
+      height: 200px; /* Set a fixed height for all images */
+      object-fit: cover; /* This will cover the area without distorting the aspect ratio */
+      border-radius: 8px; /* Optional: Adds rounded corners to the images */
+    }
+
+    /* Styles for the "join-game" section */
+    .join-game {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      overflow-x: scroll; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Prevent line breaks */
+    }
+
+    .join-game h2 {
+      font-size: 24px;
+      margin-bottom: px;
+    }
+
+    /* Styles for game options */
+    .game-options {
+      display: flex; /* Display game options in a row */
+      gap: 20px; /* Add space between game options */
+      white-space: nowrap; /* Prevent line breaks for game options */
+      overflow-x: auto; /* Enable horizontal scrolling for game options */
+    }
+
+    .game-option {
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      width: 300px; /* Adjust the width of each option */
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      overflow: hidden; /* Hide content overflow */
+      text-align: center;
+      transition: transform 0.3s ease; /* Add a hover effect */
+    }
+
+    .game-option:hover {
+      transform: scale(1.05); /* Enlarge on hover */
+    }
+
+    .game-option h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      white-space: normal; /* Allow text to wrap within h3 */
+    }
+
+    .game-option p {
+      font-size: 16px;
+      margin-bottom: 15px;
+      white-space: normal; /* Allow text to wrap within p */
+    }
+
+    .game-option .btn {
+      text-decoration: none;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 4px;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    .game-option .btn:hover {
+      background-color: #45a049; /* Darker green on hover */
+    }
+    .footer-bar {
+        background-color: #001f3f;
+        height: 3px;
+        margin: 0;
+    }
+
+    .footer-content {
+    display: flex;
+    text-align: left;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+    .footer-contact {
+        flex: 1;
+    }
+
+    .footer-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff; /* Text color added for better visibility */
+        margin-bottom: 5px; /* Adjusted margin for better spacing */
+    }
+
+    /* Contact details */
+    .footer-contact p {
+        font-size: 14px;
+        margin: 2px 0; /* Adjusted margin for better spacing */
+        color: #fff; /* Text color added for better visibility */
+    }
+
+    /* Copyright section */
+    .footer-copyright {
+        background-color: #001f3f;
+        color: #fff;
+        text-align: left;
+        font-size: 12px; /* Adjusted font size for copyright text */
+    }
+
+    /* Footer picture container */
+    .footer-picture-container {
+        text-align: right;
+        padding-top: 5px; /* Adjust as needed for spacing */
+    }
+
+    .footer-picture-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px; /* Add border-radius for rounded corners */
+    }
+
+    /* Styles for the announcement board */
+    .announcement-board {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      margin: 20px auto;
+      padding: 15px;
+      max-height: 150px; /* Set a suitable height */
+      overflow: hidden; /* Hide the scrollbar */
+      width: 80%;
+      position: relative;
+      border-radius: 8px; /* Rounded corners for the board */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+      display: flex; /* Use flexbox for centering */
+      align-items: center; /* Center vertically */
+      justify-content: center; /* Center horizontally */
+    }
+
+    /* Styles for the announcement container */
+    .announcement-container {
+      white-space: nowrap;
+      overflow: hidden; /* Hide overflowing content */
+    }
+
+    /* Keyframes for the auto-slide animation */
+    @keyframes slide {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* Styles for individual announcement items */
+    .announcement-item {
+      padding: 5px 10px;
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+      white-space: nowrap; /* Prevent text from wrapping */
+      text-overflow: ellipsis; /* Show ellipsis (...) for overflow */
+      opacity: 0; /* Initially hide the announcements */
+      animation: fadeIn 1s linear forwards; /* Fade-in animation */
+    }
+
+    /* Keyframes for the fade-in animation */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+    <script>
+        // Function to get URL parameter by name
+        function getParameterByName(name, url) {
+          if (!url) url = window.location.href;
+          name = name.replace(/[\[\]]/g, "\\$&");
+          var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+          if (!results) return null;
+          if (!results[2]) return '';
+          return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+      
+        // Get the userID from the URL
+        var userID = getParameterByName('userID');
+      
+        // Update the links dynamically
+        document.addEventListener('DOMContentLoaded', function () {
+          var loginLogoutLinks = document.getElementById('login-logout-links');
+      
+          if (userID) {
+            // User is logged in
+            loginLogoutLinks.innerHTML = '<a href="manageacc_page.html" style="color: white; padding: 0 10px;">View Account</a>' +
+                                         '<a href="login_page.html" style="color: white; padding: 0 10px;">Log out</a>';
+          } else {
+            // User is not logged in
+            loginLogoutLinks.innerHTML = '<a href="login_page.html" style="color: white; padding: 0 10px;">Log in</a>' +
+                                         '<a href="signup_page.html" style="color: white; padding: 0 10px;">Sign up</a>';
+          }
+        });
+      </script>
+
+<div class="navbar">
+  <img src="../img/UUM_logo.png" alt="Logo">
+  <div id="login-logout-links">
+    <a href="manageacc_page.html" style="color: white; padding: 0 10px;">View Account</a>
+    <a href="login_page.html" style="color: white; padding: 0 10px;">Log out</a>
+  </div>
+</div>
+
+<div class="hero">
+  <img class="sports-image sports-image-hover" src="../img/sportscenter-01.png" alt="Sports Center 1">
+  <img class="sports-image sports-image-hover" src="../img/sportscenter-03.png" alt="Sports Center 3">
+</div>
+
+
+<div class="announcement-board">
+  <div class="announcement-container">
+    <div class="announcement-item">Announcement 1: Welcome to our UUM Sport Court Reservation System!</div>
+    <div class="announcement-item">Announcement 2: Check out the latest court availability online.</div>
+    <div class="announcement-item">Announcement 3: Join our upcoming badminton tournament.</div>
+    <div class="announcement-item">Announcement 4: UUM Sports Centre's operation hours are from 8:00 a.m. until 8:00 p.m.</div>
+    <div class="announcement-item">Announcement 5: UUM Sports Centre's operation days from Sunday to Friday</div>
+    <!-- Add more announcements here -->
+  </div>
+</div>
+
+<div class="court-list">
+  <div class="court-item">
+    <a href="badmintoncourt_page.html">
+      <img src="img/badminton.png" alt="Badminton Court">
+      <p>Badminton</p>
+    </a>
+  </div>
+  <div class="court-item">
+    <a href="tenniscourt_page.html">
+      <img src="../img/tennis.png" alt="Tennis Court">
+      <p>Tennis</p>
+    </a>
+  </div>
+  <div class="court-item">
+    <a href="squashcourt_page.html">
+      <img src="../img/Squash.png" alt="Squash Court">
+      <p>Squash</p>
+    </a>
+  </div>
+</div>
+
+<div class="join-game">
+  <h2>Join game with others!</h2>
+  <div class="game-options">
+    <div class="game-option">
+      <h3>Badminton Tournament</h3>
+      <p>Join our exciting Badminton Tournament and compete with others.</p>
+      <a href="#" class="btn">Join Now</a>
+    </div>
+    <div class="game-option">
+      <h3>Tennis Doubles</h3>
+      <p>Team up with a partner and play in our Tennis Doubles event.</p>
+      <a href="#" class="btn">Join Now</a>
+    </div>
+    <div class="game-option">
+      <h3>Squash Challenge</h3>
+      <p>Take on the Squash Challenge and show off your skills.</p>
+      <a href="#" class="btn">Join Now</a>
+    </div>
+    <!-- Add more game options here -->
+  </div>
+</div>
+
+  <script src="../js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="../js/plugins.js"></script>
+  <script src="../js/main.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
+    function createAnnouncement(text) {
+      const announcement = document.createElement('div');
+      announcement.className = 'announcement-item';
+      announcement.textContent = text;
+      return announcement;
+    }
+
+    function setupAnnouncements() {
+      const announcements = [
+        'Welcome to our UUM Sport Court Reservation System!',
+        'Check out the latest court availability online.',
+        'Join our upcoming badminton tournament.',
+        'UUM Sports Centre\'s operation hours are from 8:00 a.m. until 8:00 p.m.',
+        'UUM Sports Centre\'s operation days from Sunday to Friday'
+        // Add more announcements here
+      ];
+
+      const announcementContainer = document.querySelector('.announcement-container');
+      let currentIndex = 0;
+
+      function displayAnnouncement(index) {
+        announcementContainer.innerHTML = '';
+        announcementContainer.appendChild(createAnnouncement(announcements[index]));
+      }
+
+      function switchAnnouncement() {
+        displayAnnouncement(currentIndex);
+        currentIndex = (currentIndex + 1) % announcements.length;
+      }
+
+      switchAnnouncement(); // Initial display
+
+      setInterval(switchAnnouncement, 5000); // Switch to the next announcement every 5 seconds
+    }
+
+    
+
+    document.addEventListener('DOMContentLoaded', setupAnnouncements);
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+
+ <footer style="background-color: #001f3f; margin: 0; padding: 0;">
+    <div class="footer-bar"></div>
+    <div class="footer-content" style="padding: 5px 1cm;">
+        <div class="footer-contact">
+            <p class="footer-title" style="font-size: 16px; font-weight: bold; color: #fff; margin-left: 0cm;">SPORTS CENTRE</p>
+            <p style="font-size: 14px; color: #fff;">UNIVERSITI UTARA MALAYSIA </p>
+            <p style="font-size: 14px; color: #fff;">06010 Sintok</p>
+            <p style="font-size: 14px; color: #fff;">Kedah Darul Aman, Malaysia</p>
+            <p style="font-size: 14px; color: #fff;">&phone; +604-928 3560</p>
+            
+        </div>
+  
+        <div class="footer-picture-container">
+            <img src="img/footer.png" alt="Footer Picture" title="Footer Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+        </div>
+    </div>
+  
+    <div class="footer-copyright" style="padding: 5px 1cm;">
+        <p style="margin: 0; font-size: 12px;">&copy; 2022 Universiti Utara Malaysia</p>
+    </div>
+</footer>
+  
+</body>
+
+</html>

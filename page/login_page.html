@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: url('../page/img/register.jpeg');
+      margin: 0;
+    }
+
+    header {
+  background-color: #050531; /* Green background color */
+  color: #fff; /* White text color */
+  text-align: center;
+  padding: 15px 0; /* Adjusted padding for the header */
+  position: relative;
+  top: 0;
+  z-index: 999;
+  transition: background-color 0.3s;
+}
+
+h1 {
+  color: #ffcc00;
+  text-align: center;
+  margin: 0; /* Remove margin to match the "Sign Up" header */
+}
+
+.navbar {
+  background-color: #050531; /* Green background color */
+  overflow: hidden;
+  text-align: center;
+  padding: 15px;
+  margin-left: 3cm;
+  margin-right: 3cm;
+  border-top-left-radius: 0; /* Rounded top-left corner */
+  border-top-right-radius: 0; /* Rounded top-right corner */
+  border-bottom-left-radius: 10px; /* Square bottom-left corner */
+  border-bottom-right-radius: 10px; /* Square bottom-right corner */
+}
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50vh; /* Make sure the container takes the full height of the viewport */
+    }
+
+    .login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 71.5vh; /* Make sure the container takes the full height of the viewport */
+  margin-left: 10cm;
+  margin-right: 10cm;
+}
+
+.login-form-container {
+  flex: 1;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Center the container horizontally */
+  background: rgb(255, 255, 255);
+  max-width: 400px;
+  margin: auto;
+  border-top-left-radius: 10px; /* Rounded top-left corner */
+  border-top-right-radius: 10px; /* Rounded top-right corner */
+  border-bottom-left-radius: 10px; /* Square bottom-left corner */
+  border-bottom-right-radius: 10px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 300px;
+  margin: auto;
+}
+.login-form h2 {
+  font-size: 28px; /* Adjust the font size for h2 */
+  margin-bottom: 10px; /* Add margin at the bottom of h2 */
+}
+
+.login-form p {
+  font-size: 12px; /* Adjust the font size for p */
+  margin-bottom: 15px; /* Add more margin at the bottom of p */
+}
+
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+    .login-btn {
+      background-color: #ffcc00;
+      color: white;
+      padding: 14px 20px;
+      margin: 10px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .login-btn:hover {
+      opacity: 0.8;
+    }
+
+    .form-footer {
+      color: #777;
+      text-align: center;
+    }
+
+    .form-footer a {
+      color: #ffcc00;
+      text-decoration: none;
+    }
+
+    .checkbox-container {
+      margin-bottom: 15px;
+    }
+
+    .checkbox {
+      margin-right: 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <h1>Court Reservation System</h1>
+</div>
+
+<div class="login-container">
+  <div class="login-image"></div>
+  <div class="login-form-container">
+    <form class="login-form" action="php/login_check.php" method="post">
+      <h2>LOG IN</h2>
+      <p>Log in to book sports courts and join games</p>
+      <label for="matricNo">Enter your matric number</label>
+      <input type="text" id="matricNo" name="matricNo" required>
+    
+      <label for="password">Enter your password</label>
+      <input type="password" id="password" name="password" required>
+    
+      <div class="checkbox-container">
+        <input type="checkbox" id="remember-me" class="checkbox">
+        <label for="remember-me">Remember me</label>
+      </div>
+    
+      <button type="submit" class="login-btn">Log in</button>
+    
+      <div class="form-footer">
+        <p>Forgot Password? <a href="#">Click here</a></p>
+        <p>No account? <a href="signup_page.html">Sign Up here!</a></p>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+
+</html>
