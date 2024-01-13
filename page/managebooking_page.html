@@ -270,6 +270,27 @@
         }
     }
 
+    function formatTimeSlot(startTime, endTime) {
+        // Assuming startTime and endTime are in the format "HH:mm:ss"
+        var startParts = startTime.split(":");
+        var endParts = endTime.split(":");
+
+        var formattedStartTime = formatHour(parseInt(startParts[0])) + " " + getAMPM(parseInt(startParts[0]));
+        var formattedEndTime = formatHour(parseInt(endParts[0])) + " " + getAMPM(parseInt(endParts[0]));
+
+        return formattedStartTime + " - " + formattedEndTime;
+    }
+
+    function formatHour(hour) {
+        // Format the hour to remove leading zero and convert to 12-hour format
+        return (hour % 12 === 0 ? 12 : hour % 12).toString();
+    }
+
+    function getAMPM(hour) {
+        // Determine whether it's AM or PM
+        return hour < 12 ? "am" : "pm";
+    }
+
     // Functions for edit and delete actions
     window.editBooking = function(bookID) {
       // Implement the edit functionality, e.g., redirect to an edit page with the bookingId
@@ -351,7 +372,7 @@
                     "<td>" + booking.sportName + "</td>" +
                     "<td>" + booking.courtNo + "</td>" +
                     "<td>" + formatDate(booking.bookDate) + "</td>" +
-                    "<td>" + booking.startTime + " - " + booking.endTime + "</td>" +
+                    "<td>" + formatTimeSlot(booking.startTime, booking.endTime) + "</td>" +
                     "<td class='action-buttons'>" +
                     "<button class='edit-button' onclick='editBooking(" + booking.bookID + ")'>Edit</button>" +
                     "<button class='delete-button' onclick='deleteBooking(" + booking.bookID + ")'>Delete</button>" +
