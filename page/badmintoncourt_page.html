@@ -466,6 +466,17 @@ nav a {
     
     <input type="hidden" id="user_id" name="user_id" value="userID">
     <script>
+      // Function to get a parameter from the URL by name
+      function getParameterByName(name, url) {
+          if (!url) url = window.location.href;
+          name = name.replace(/[\[\]]/g, "\\$&");
+          var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+          if (!results) return null;
+          if (!results[2]) return '';
+          return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        
       document.addEventListener("DOMContentLoaded", function () {
          let currentIndex = 0;
          const announcements = document.querySelectorAll('.announcement');
@@ -479,17 +490,6 @@ nav a {
          }
      
          setInterval(changeAnnouncement, 5000); // Change announcement every 5 seconds
-
-         // Function to get a parameter from the URL by name
-        function getParameterByName(name, url) {
-          if (!url) url = window.location.href;
-          name = name.replace(/[\[\]]/g, "\\$&");
-          var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-          if (!results) return null;
-          if (!results[2]) return '';
-          return decodeURIComponent(results[2].replace(/\+/g, " "));
-        }
      
          // Get the userID from the URL
          var userID = getParameterByName('userID');
@@ -693,6 +693,17 @@ nav a {
     availabilityStatus.appendChild(timetable);
   }
 
+  // Function to redirect to managebooking_page.html
+  function redirectToManageBooking() {
+    // Get the userID from the URL
+    var userID = getParameterByName('userID');
+
+    console.log("Redirecting to manageBooking_page.html. UserID:", userID);
+
+    // Redirect to managebooking_page.html
+    window.location.href = "managebooking_page.html?userID=" + userID;
+  }
+
   function bookCourt() {
     const date = document.getElementById('booking-date').value;
     const time = document.getElementById('booking-time').value;
@@ -721,9 +732,15 @@ nav a {
                     bookingXhr.open("POST", "php/process_booking.php", true);
                     bookingXhr.onload = function () {
                         if (bookingXhr.status === 200) {
-                            // Handle the successful response
-                            const bookingStatus = document.getElementById('booking-status');
-                            bookingStatus.textContent = bookingXhr.responseText;
+                            /* Handle the successful response
+                                const bookingStatus = document.getElementById('booking-status');
+                                bookingStatus.textContent = bookingXhr.responseText;*/
+
+                                // Display the success message using alert
+                                alert("Book Successfully!\nClick \"OK\" to view your booking.");
+                                
+                                // Redirect to managebooking_page.html
+                                redirectToManageBooking();
                         } else {
                             // Handle errors
                             alert("Error: " + bookingXhr.statusText);
