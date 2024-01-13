@@ -255,7 +255,7 @@
 
   <!-- Section to check court availability -->
   <section id="check-availability">
-    <h2>Check Court Availability</h2>
+    <h2>Check Court Availability Before Edit</h2>
     <!-- Add the new container for the form and timetable with adjusted styles -->
     <div id="availability-container" class="availability-container">
       <!-- Check Availability Form with adjusted width -->
@@ -364,6 +364,9 @@
           <option value="19:00">7 pm - 8 pm</option>
           <!-- Add more options as needed -->
         </select>
+
+        <!-- New element to display the formatted time -->
+        <div id="formatted-time"></div>
     
         <label for="sport-type">Select Sport:</label>
         <select id="sport-type" required>
@@ -419,6 +422,32 @@
 
             console.log(bookID);
 
+            // Fetch existing booking details based on bookID using AJAX
+            var bookingDetailsRequest = new XMLHttpRequest();
+            bookingDetailsRequest.onreadystatechange = function () {
+              if (bookingDetailsRequest.readyState === XMLHttpRequest.DONE) {
+                if (bookingDetailsRequest.status === 200) {
+                  var bookingDetails = JSON.parse(bookingDetailsRequest.responseText);
+
+                  // Check the original date format
+                  console.log("Original Date:", bookingDetails.originalDate);
+                  console.log("bookingDetails.sportNo", bookingDetails.courtNo);
+
+
+                  // Update form fields with retrieved data
+                  document.getElementById('booking-date').value = bookingDetails.originalDate;
+                  document.getElementById('booking-time').value = formatTimeSlot(bookingDetails.startTime);
+                  document.getElementById('sport-type').value = bookingDetails.sportName;
+                  document.getElementById('court-number').value = bookingDetails.courtNo;                  
+                } else {
+                  console.error("Error fetching booking details: " + bookingDetailsRequest.status);
+                }
+              }
+            };
+
+            bookingDetailsRequest.open('GET', 'php/get_booking.php?bookID=' + bookID, true);
+            bookingDetailsRequest.send();
+
             // Fetch userID based on bookID using AJAX
             var userIDRequest = new XMLHttpRequest();
             userIDRequest.onreadystatechange = function () {
@@ -451,6 +480,28 @@
             userIDRequest.open('GET', 'php/get_userID.php?bookID=' + bookID, true);
             userIDRequest.send();
         });
+    
+    // Function to format date in dd/mm/yyyy format
+    function formatDate(dateString) {
+      var date = new Date(dateString);
+      var day = date.getDate();
+      var month = date.getMonth() + 1; // Months are zero-based
+      var year = date.getFullYear();
+
+      return day + '/' + month + '/' + year;
+    }
+
+    // Function to format time slot based on startTime
+    function formatTimeSlot(startTime) {
+      var hour = parseInt(startTime.split(":")[0]);
+      console.log("Original Hour:", hour); // Add this line
+      var formattedHour = hour.toString();
+
+      var formattedTime = formattedHour + ':00';
+
+      console.log("Formatted Time:", formattedTime); // Add this line
+      return formattedTime;
+    }
         
     // Example JavaScript to dynamically create court and time options
     const courtsContainer = document.getElementById('courts');
@@ -576,12 +627,16 @@
     }
 
     function editReservation() {
-        const date = document.getElementById('booking-date').value;
+        //const date = document.getElementById('booking-date').value;
+        const originalDate = document.getElementById('booking-date').value;
         const time = document.getElementById('booking-time').value;
         const sport = document.getElementById('sport-type').value;
         const court = document.getElementById('court-number').value;
         //const userId = document.getElementById('user_id').value;
         const bookID = document.getElementById('bookID').value; // Add this line to get bookID
+
+        // Format the date for server in "yyyy-MM-dd" format
+        const formattedDate = formatDateForServer(originalDate);
 
         // Send an AJAX request to check availability
         const availabilityXhr = new XMLHttpRequest();
@@ -595,7 +650,8 @@
                         // Create a FormData object and append form data
                         const formData = new FormData();
                         //formData.append("user_id", userId);
-                        formData.append("booking-date", date);
+                        formData.append("booking-date", formattedDate);
+                        //formData.append("booking-date", date);
                         formData.append("booking-time", time);
                         formData.append("sport-type", sport);
                         formData.append("court-number", court);
@@ -636,7 +692,16 @@
         availabilityXhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         // Include userID in the data sent to the server
-        availabilityXhr.send(`date=${date}&time=${time}&sport=${sport}&court=${court}&bookID=${bookID}`);
+        availabilityXhr.send(`date=${formattedDate}&time=${time}&sport=${sport}&court=${court}&bookID=${bookID}`);
+    }
+
+    // Function to format date for server in "yyyy-MM-dd" format
+    function formatDateForServer(dateString) {
+        const date = new Date(dateString);
+        const yyyy = date.getFullYear();
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const dd = String(date.getDate()).padStart(2, '0');
+        return `${yyyy}-${mm}-${dd}`;
     }
   </script>
 
