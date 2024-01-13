@@ -32,8 +32,8 @@ if ($result->num_rows > 0) {
             // Redirect to admin.html
             header("Location: ../admin.html");
         } else {
-            // Redirect to index.html with the userID as a parameter
-            header("Location: ../index.html?userID=$loggedInUserID");
+            // Redirect to main.html with the userID as a parameter
+            header("Location: ../main.html?userID=$loggedInUserID");
         }
     } else {
         // Password is incorrect

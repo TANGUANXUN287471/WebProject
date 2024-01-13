@@ -315,14 +315,56 @@
 </head>
 
 <body>
-  
+  <script>
+    // Update the links dynamically
+    document.addEventListener('DOMContentLoaded', function () {
+      // Function to get URL parameter by name
+      function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
+
+      // Get the userID from the URL
+      var userID = getParameterByName('userID');
+
+      var badmintonLink = document.querySelector('.court-item a[href="badmintoncourt_page.html"]');
+      var tennisLink = document.querySelector('.court-item a[href="tenniscourt_page.html"]');
+      var squashLink = document.querySelector('.court-item a[href="squashcourt_page.html"]');
+      var manageaccLink = document.querySelector('.navbar a[href="manageacc_page.html"]');
+      var manageBookingLink = document.querySelector('.navbar a[href="managebooking_page.html"]');
+
+      if (badmintonLink) {
+        badmintonLink.href = "badmintoncourt_page.html?userID=" + userID;
+      }
+
+      if (tennisLink) {
+        tennisLink.href = "tenniscourt_page.html?userID=" + userID;
+      }
+
+      if (squashLink) {
+        squashLink.href = "squashcourt_page.html?userID=" + userID;
+      }
+      if (manageaccLink) {
+        manageaccLink.href = "manageacc_page.html?userID=" + userID;
+      }
+      if (manageBookingLink) {
+        manageBookingLink.href = "managebooking_page.html?userID=" + userID;
+      }
+    });
+  </script>
 
 
 <div class="navbar">
   <img src="../img/UUM_logo.png" alt="Logo">
   <div>
-    <a href="login_page.html" style="color: white; padding: 0 10px;">Login</a>
-    <a href="signup_page.html" style="color: white; padding: 0 10px;">Sign up</a>
+    <a href="managebooking_page.html" style="color: white; padding: 0 10px;">View Booking</a>
+    <a href="manageacc_page.html" style="color: white; padding: 0 10px;">View Account</a>
+    <a href="login_page.html" style="color: white; padding: 0 10px;">Log out</a>
   </div>
 </div>
 
@@ -345,22 +387,22 @@
 
 <div class="court-list">
   <div class="court-item">
-    
-      <img src="img/badminton.png" alt="Badminton Court" onclick="askForConfirmation()" style="cursor: pointer">
+    <a href="badmintoncourt_page.html">
+      <img src="img/badminton.png" alt="Badminton Court">
       <p>Badminton</p>
-    
+    </a>
   </div>
   <div class="court-item">
-    
-      <img src="../img/tennis.png" alt="Tennis Court" onclick="askForConfirmation()" style="cursor: pointer">
+    <a href="tenniscourt_page.html">
+      <img src="../img/tennis.png" alt="Tennis Court">
       <p>Tennis</p>
-    
+    </a>
   </div>
   <div class="court-item">
-    
-      <img src="../img/Squash.png" alt="Squash Court" onclick="askForConfirmation()" style="cursor: pointer">
+    <a href="squashcourt_page.html">
+      <img src="../img/Squash.png" alt="Squash Court">
       <p>Squash</p>
-    
+    </a>
   </div>
 </div>
 
@@ -370,23 +412,23 @@
   <div class="game-options">
     <div class="game-option" id="badmintonOption">
       <h3>Badminton Tournament</h3>
-      <p>Join our exciting Badminton Tournament.&nbsp;&nbsp;&nbsp;</p>
-      <button onclick="askForConfirmation()" style="cursor: pointer" class="btn-primary">View Games</button>
+      <p>Join our exciting Badminton Tournament.</p>
+      <a href="listgame_page.html?type=badminton" class="btn">View Games</a>
     </div>
     <div class="game-option" id="tennisOption">
       <h3>Tennis Doubles</h3>
       <p>Team up with a partner and play in our Tennis Doubles event.</p>
-      <button onclick="askForConfirmation()" style="cursor: pointer" class="btn-primary">View Games</button>
+      <a href="listgame_page.html?type=tennis" class="btn">View Games</a>
     </div>
     <div class="game-option" id="squashOption">
       <h3>Squash Challenge</h3>
       <p>Take on the Squash Challenge and show off your skills.</p>
-      <button onclick="askForConfirmation()" style="cursor: pointer" class="btn-primary">View Games</button>
+      <a href="listgame_page.html?type=squash" class="btn">View Games</a>
     </div>
     <div class="game-option" id="createGameOption">
       <h3>Create Your Own Game</h3>
       <p>Organize a new sports event and invite others to join!</p>
-      <button onclick="askForConfirmation()" style="cursor: pointer" class="btn-primary">View Games</button>
+      <a href="creategame_page.html?userID=" + userID class="btn">Create Game</a>
     </div>
     <!-- Add more game options here -->
   </div>
@@ -407,19 +449,6 @@
       announcement.textContent = text;
       return announcement;
     }
-
-    function askForConfirmation() {
-            // Display a confirmation dialog
-            var result = window.confirm("Login to book your court");
-            
-            // Check the result
-            if (result) {
-                // If user clicks OK, navigate to another HTML page
-                window.location.href = 'login_page.html';
-            } else {
-                event.preventDefault();
-            }
-        }
 
     function setupAnnouncements() {
       const announcements = [
