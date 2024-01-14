@@ -351,8 +351,8 @@ function deleteProfile() {
                 console.log("Response from delete_user.php:", xhr.responseText);
 
                 if (xhr.status === 200) {
-                    // Redirect to login page after successful deletion
-                    window.location.href = 'login_page.html';
+                    // Redirect to index page after successful deletion
+                    window.location.href = 'index.html';
                 } else {
                     // Handle errors
                     console.error("Error: " + xhr.statusText);
