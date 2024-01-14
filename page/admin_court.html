@@ -10,70 +10,17 @@
 
     <style>
         /* Add your custom styles here */
-        body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Set minimum height to 100% of the viewport height */
-    margin: 0;
-}
-header {
-  background-color: #050531; /* Green background color */
-  color: #fff; /* White text color */
-  text-align: center;
-  padding: 15px 0; /* Adjusted padding for the header */
-  position: relative;
-  top: 0;
-  z-index: 999;
-  transition: background-color 0.3s;
-}
-
-h1 {
-  color: #ffcc00;
-  text-align: center;
-  margin: 0; /* Remove margin to match the "Sign Up" header */
-}
-.navbar {
-      overflow: hidden;
-      text-align: center;
-      padding: 15px;
-      margin-left: 0.3cm;
-      margin-right: 0.3cm;
-      border-top-left-radius: 0;
-      /* Rounded top-left corner */
-      border-top-right-radius: 0;
-      /* Rounded top-right corner */
-      border-bottom-left-radius: 10px;
-      /* Square bottom-left corner */
-      border-bottom-right-radius: 10px;
-      /* Square bottom-right corner */
-    }
-
-.container {
-    flex: 1; /* Make the container grow to fill available space */
-}
-
-footer {
-    margin-top: auto; /* Push the footer to the bottom */
-}
-
-        h2 {
-            color: #007bff;
+        .reservation-table {
+            margin-top: 20px;
         }
 
-        form {
-            margin-bottom: 20px;
+        /* Optional: Adjust the styling based on your preference */
+        body {
+            padding: 20px;
         }
 
         .btn-view {
             margin-top: 10px;
-        }
-
-        .reservation-table {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-top: 20px;
         }
 
         .modal {
@@ -94,7 +41,6 @@ footer {
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
-            border-radius: 10px;
         }
 
         .close {
@@ -111,10 +57,10 @@ footer {
             cursor: pointer;
         }
 
+        /* Adjusted layout for time slots and court numbers */
         .selection-container {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
         }
 
         .time-slot-list,
@@ -132,7 +78,6 @@ footer {
             cursor: pointer;
             transition: background-color 0.3s;
             font-size: 16px;
-            border-radius: 5px;
         }
 
         .time-slot-item:hover,
@@ -140,73 +85,18 @@ footer {
             background-color: #f2f2f2;
         }
 
+        /* Add styles for selected items */
         .selected {
             background-color: #007bff;
             color: #fff;
         }
-
-        .footer-bar {
-        background-color: #001f3f;
-        height: 3px;
-        margin: 0;
-    }
-
-    /* Footer content styles */
-    .footer-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center; /* Align items vertically in the center */
-    }
-
-    .footer-contact {
-        flex: 1;
-    }
-
-    .footer-title {
-        font-size: 16px;
-        font-weight: bold;
-        color: #fff; /* Text color added for better visibility */
-        margin-bottom: 5px; /* Adjusted margin for better spacing */
-    }
-
-    /* Contact details */
-    .footer-contact p {
-        font-size: 14px;
-        margin: 2px 0; /* Adjusted margin for better spacing */
-        color: #fff; /* Text color added for better visibility */
-    }
-
-    /* Copyright section */
-    .footer-copyright {
-        background-color: #001f3f;
-        color: #fff;
-        text-align: left;
-        font-size: 12px; /* Adjusted font size for copyright text */
-    }
-
-    /* Footer picture container */
-    .footer-picture-container {
-        text-align: right;
-        padding-top: 5px; /* Adjust as needed for spacing */
-    }
-
-    .footer-picture-container img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 5px; /* Add border-radius for rounded corners */
-    }
-
     </style>
 </head>
 
 <body>
 
-<header class="navbar">
-    <h1>ADMIN PAGE</h1>
-</header>
-
 <div class="container">
-    <h2 class="mt-3 mb-3"></h2>
+    <h2 class="mt-3 mb-3">Admin Page</h2>
 
     <form id="reservationForm">
         <div class="form-row align-items-center">
@@ -225,9 +115,12 @@ footer {
             </div>
 
             <div class="col-auto">
-                <button type="button" class="btn btn-primary btn-view" onclick="viewReservations()">View Reservations</button>
-                <button type="button" class="btn btn-primary btn-view" onclick="editReservation()">Edit Reservation</button>
-                <button type="button" class="btn btn-primary btn-view" onclick="deleteReservation()">Delete Reservation</button>
+                <button type="button" class="btn btn-primary btn-view" onclick="viewReservations()">View
+                    Reservations</button>
+                <button type="button" class="btn btn-primary btn-view" onclick="editReservation()">Edit
+                    Reservation</button>
+                <button type="button" class="btn btn-primary btn-view" onclick="deleteReservation()">Delete
+                    Reservation</button>
             </div>
         </div>
     </form>
@@ -239,33 +132,222 @@ footer {
 
 <!-- Add Bootstrap JS and Popper.js scripts here -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 
 <script>
-    // JavaScript code here
+    function viewReservations() {
+        // Get form data
+        var formData = new FormData(document.getElementById("reservationForm"));
+
+        // Send AJAX request to view_reservations.php
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "php/view_reservations.php", true);
+
+        // Set up a callback function to handle the response
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                document.getElementById("reservationTable").innerHTML = xhr.responseText;
+            } else {
+                console.error("Request failed. Status: " + xhr.status);
+            }
+        };
+
+        // Set up a callback function to handle network errors
+        xhr.onerror = function () {
+            console.error("Network error occurred");
+        };
+
+        // Send the request
+        xhr.send(formData);
+    }
+
+    function editReservation() {
+        // Get form data
+        var formData = new FormData(document.getElementById("reservationForm"));
+
+        // Send AJAX request to edit_reservation.php
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "php/edit_reservation.php", true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Parse JSON response
+                var response = JSON.parse(xhr.responseText);
+
+                // Check if the response status is 'success'
+                if (response.status === 'success') {
+                    // Display a modal with multi-select dropdowns for time slots and court numbers
+                    var modal = document.createElement("div");
+                    modal.classList.add("modal");
+                    modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Select Time Slots and Court Numbers</h2>
+                    <div class="selection-container">
+                        <ul class="time-slot-list">
+                            ${response.timeSlots.map(slot => `<li class="time-slot-item" data-slot-id="${slot.slotID}" onclick="toggleSelection(this)">${slot.startTime} - ${slot.endTime}</li>`).join('')}
+                        </ul>
+                        <ul class="court-list">
+                            ${response.courts.map(court => `<li class="court-item" data-court-id="${court.courtID}" onclick="toggleSelection(this)">Court ${court.courtNo}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <button type="button" onclick="submitEditForm()">Submit</button>
+                </div>
+            `;
+
+                    // Append the modal to the document body
+                    document.body.appendChild(modal);
+
+                    // Display the modal
+                    modal.style.display = "block";
+                } else {
+                    // Display an error message
+                    alert(response.message);
+                }
+            }
+        };
+        xhr.send(formData);
+    }
+
+    function toggleSelection(element) {
+        element.classList.toggle("selected");
+    }
+
+    function closeModal() {
+        var modal = document.querySelector(".modal");
+        if (modal) {
+            modal.remove();
+        }
+    }
+
+    function submitEditForm() {
+        // Get selected time slots and court numbers
+        var selectedTimeSlots = document.querySelectorAll('.time-slot-item.selected');
+        var selectedCourts = document.querySelectorAll('.court-item.selected');
+
+        // Extract IDs from selected items
+        var selectedSlotIDs = Array.from(selectedTimeSlots).map(item => item.dataset.slotId);
+        var selectedCourtIDs = Array.from(selectedCourts).map(item => item.dataset.courtId);
+
+        console.log("Selected Slot IDs:", selectedSlotIDs);
+        console.log("Selected Court IDs:", selectedCourtIDs);
+
+        // Check if at least one time slot and one court number is selected
+        if (!selectedSlotIDs.length || !selectedCourtIDs.length) {
+            console.error("Please select at least one time slot and one court number.");
+            alert("Please select at least one time slot and one court number.");
+            return;
+        }
+
+        // Add selected slots and courts to the form data
+        var formData = new FormData(document.getElementById("reservationForm"));
+        formData.append("selectedSlots", JSON.stringify(selectedSlotIDs));
+        formData.append("selectedCourts", JSON.stringify(selectedCourtIDs));
+
+        // Send AJAX request to insert_booking.php
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "php/insert_bookings.php", true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Handle the response as needed
+                console.log(xhr.responseText);
+                // Close the modal after successful submission
+                closeModal();
+            } else {
+                console.error("Request failed. Status: " + xhr.status);
+            }
+        };
+        xhr.send(formData);
+    }
+
+    function deleteReservation() {
+        // Get form data
+        var formData = new FormData(document.getElementById("reservationForm"));
+
+        // Send AJAX request to delete_reservation.php
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "php/edit_reservation.php", true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Parse JSON response
+                var response = JSON.parse(xhr.responseText);
+
+                // Check if the response status is 'success'
+                if (response.status === 'success') {
+                    // Display a modal with multi-select dropdowns for time slots and court numbers
+                    var modal = document.createElement("div");
+                    modal.classList.add("modal");
+                    modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Select Time Slots and Court Numbers to Delete</h2>
+                    <div class="selection-container">
+                        <ul class="time-slot-list">
+                            ${response.timeSlots.map(slot => `<li class="time-slot-item" data-slot-id="${slot.slotID}" onclick="toggleSelection(this)">${slot.startTime} - ${slot.endTime}</li>`).join('')}
+                        </ul>
+                        <ul class="court-list">
+                            ${response.courts.map(court => `<li class="court-item" data-court-id="${court.courtID}" onclick="toggleSelection(this)">Court ${court.courtNo}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <button type="button" onclick="submitDeleteForm()">Delete</button>
+                </div>
+            `;
+
+                    // Append the modal to the document body
+                    document.body.appendChild(modal);
+
+                    // Display the modal
+                    modal.style.display = "block";
+                } else {
+                    // Display an error message
+                    alert(response.message);
+                }
+            }
+        };
+        xhr.send(formData);
+    }
+
+    function submitDeleteForm() {
+        // Get selected time slots and court numbers
+        var selectedTimeSlots = document.querySelectorAll('.time-slot-item.selected');
+        var selectedCourts = document.querySelectorAll('.court-item.selected');
+
+        // Extract IDs from selected items
+        var selectedSlotIDs = Array.from(selectedTimeSlots).map(item => item.dataset.slotId);
+        var selectedCourtIDs = Array.from(selectedCourts).map(item => item.dataset.courtId);
+
+        console.log("Selected Slot IDs to Delete:", selectedSlotIDs);
+        console.log("Selected Court IDs to Delete:", selectedCourtIDs);
+
+        // Check if at least one time slot and one court number is selected
+        if (!selectedSlotIDs.length || !selectedCourtIDs.length) {
+            console.error("Please select at least one time slot and one court number to delete.");
+            alert("Please select at least one time slot and one court number to delete.");
+            return;
+        }
+
+        // Add selected slots and courts to the form data
+        var formData = new FormData(document.getElementById("reservationForm"));
+        formData.append("selectedSlots", JSON.stringify(selectedSlotIDs));
+        formData.append("selectedCourts", JSON.stringify(selectedCourtIDs));
+
+        // Send AJAX request to delete_reservation.php
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "php/delete_reservation.php", true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Handle the response as needed
+                console.log(xhr.responseText);
+                // Close the modal after successful deletion
+                closeModal();
+            } else {
+                console.error("Request failed. Status: " + xhr.status);
+            }
+        };
+        xhr.send(formData);
+    }
 </script>
-
-<footer style="background-color: #001f3f; margin: 0; padding: 0;">
-    <div class="footer-bar"></div>
-    <div class="footer-content" style="padding: 10px 1cm 10px 0;">
-        <div class="footer-contact">
-            <p class="footer-title" style="font-size: 16px; font-weight: bold; color: #fff; margin-left: 1cm;">SPORTS CENTRE</p>
-            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">UNIVERSITI UTARA MALAYSIA </p>
-            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">06010 Sintok</p>
-            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">Kedah Darul Aman, Malaysia</p>
-            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">&phone; +604-928 3560</p>
-        </div>
-
-        <div class="footer-picture-container">
-            <img src="img/footer.png" alt="Footer Picture" title="Footer Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
-        </div>
-    </div>
-
-    <div class="footer-copyright" style="padding: 5px 1cm;">
-        <p style="margin: 0; font-size: 12px;">&copy; 2022 Universiti Utara Malaysia</p>
-    </div>
-</footer>
 
 </body>
 

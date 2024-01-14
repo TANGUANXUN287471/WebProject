@@ -321,8 +321,8 @@ h1 {
 <script>
 
     function goBack() {
-        window.history.back();
-    }
+          window.location.href = 'admin_users.html';
+}
 
     function formatDate(dateString) {
         // Assuming dateString is in the format "YYYY-MM-DD"
@@ -358,7 +358,7 @@ h1 {
     // Functions for edit and delete actions
     window.editBooking = function(bookID) {
       // Implement the edit functionality, e.g., redirect to an edit page with the bookingId
-      window.location.href = "editbooking_page.html?bookID=" + bookID;
+      window.location.href = "admin_editBP.html?bookID=" + bookID;
     };
 
     // Global function for delete action

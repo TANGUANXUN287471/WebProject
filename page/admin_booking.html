@@ -404,39 +404,39 @@ footer {
             });
         }
 
-       function editUser(userID) {
-           // Redirect to the manageacc_page.html for the specified user
-           window.location.href = `admin_editU.html?userID=${userID}`;
-       }
+           window.editBooking = function(bookID) {
+      // Implement the edit functionality, e.g., redirect to an edit page with the bookingId
+      window.location.href = "admin_editBB.html?bookID=" + bookID;
+    };
 
-       function deleteUser(userID) {
-           // Implement deletion logic (you need to implement this)
-           // Example:
-           // fetch('php/delete_user.php', {
-           //     method: 'POST',
-           //     headers: {
-           //         'Content-Type': 'application/json',
-           //     },
-           //     body: JSON.stringify({ userID: userID }),
-           // })
-           // .then(response => response.json())
-           // .then(result => {
-           //     if (result.success) {
-           //         alert('User deleted successfully.');
-           //         loadUsers(); // Refresh the user list after deletion
-           //     } else {
-           //         alert('Failed to delete user.');
-           //     }
-           // });
+    // Global function for delete action
+    window.deleteBooking = function (bookID) {
+      var confirmationModal = confirm("Are you sure you want to delete this booking?");
+      if (confirmationModal) {
+        var deleteXhr = new XMLHttpRequest();
+        deleteXhr.onreadystatechange = function () {
+          if (deleteXhr.readyState == 4) {
+            if (deleteXhr.status == 200) {
+              var response = JSON.parse(deleteXhr.responseText);
+              if (response.success) {
+                alert("Booking deleted successfully!");
+                // Reload the page or update the table after deletion
+                location.reload();
+              } else {
+                console.error("Failed to delete booking. Reason: " + response.message);
+              }
+            } else {
+              console.error("Error deleting booking. Status code: " + deleteXhr.status);
+            }
+          }
+        };
 
-           // Dummy data for testing
-           alert(`Delete user with ID ${userID}`);
-       }
-       function viewBooking(userID) {
-               // Redirect to the admin_editB.html for the specified user
-               window.location.href = `admin_editB.html?userID=${userID}`;
-           }
-
+        // Make sure to replace 'delete_booking.php' with the correct path to your server-side script
+        deleteXhr.open("POST", "php/delete_booking.php", true);
+        deleteXhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        deleteXhr.send("bookID=" + bookID);
+      }
+    };
 </script>
 
 <footer style="background-color: #001f3f; margin: 0; padding: 0;">

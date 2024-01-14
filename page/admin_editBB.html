@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDIT RESERVATION</title>
+    <style>
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+          color: #333;
+          line-height: 1.6;
+        }
+
+        .navbar {
+          overflow: hidden;
+          text-align: center;
+          padding: 15px;
+          margin-left: 0.3cm;
+          margin-right: 0.3cm;
+          border-top-left-radius: 5px; /* Rounded top-left corner */
+          border-top-right-radius: 5px; /* Rounded top-right corner */
+          border-bottom-left-radius: 0; /* Square bottom-left corner */
+          border-bottom-right-radius: 0; /* Square bottom-right corner */
+        }
+
+        a {
+          text-decoration: none;
+          color: #0077cc;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+
+        /* Header styles */
+        header {
+          background-color: #050531; /* Green background color */
+          color: #fff; /* White text color */
+          text-align: center;
+          padding: 20px 0;
+          position: relative;
+          top: 0;
+          z-index: 999;
+          transition: background-color 0.3s;
+        }
+
+        header h1 {
+          font-size: 28px; /* Increase font size for main title */
+          margin-bottom: 10px;
+          font-weight: bold; /* Add bold font for main title */
+        }
+
+        /* Navigation menu styles */
+        nav {
+        background-color: #333; /* Dark background color for the menu */
+        padding: 10px 0;
+        margin-left: 0.3cm;
+        margin-right: 0.3cm;
+        text-align: center;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        border-top-left-radius: 0; /* Rounded top-left corner */
+        border-top-right-radius: 0; /* Rounded top-right corner */
+        border-bottom-left-radius: 5px; /* Square bottom-left corner */
+        border-bottom-right-radius: 5px; /* Rounded corners for the navbar */
+        }
+
+        nav a {
+        margin-right: 20px;
+        color: #fff; /* White text color for menu items */
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 20px; /* Add padding to menu items */
+        border-radius: 10px; /* Rounded corners for the menu items */
+        transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+        background-color: #4CAF50; /* Green background color on hover */
+        color: #fff; /* White text color on hover */
+        }
+
+        /* Section styles */
+        section {
+          background-color: #fff; /* White background color for sections */
+          padding: 20px;
+          margin: 20px;
+          border-radius: 8px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        section h2 {
+          font-size: 24px; /* Adjust font size for section titles */
+          margin-bottom: 10px;
+        }
+
+        .footer-bar {
+            background-color: #001f3f;
+            height: 3px;
+            margin: 0;
+        }
+
+        /* Footer content styles */
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically in the center */
+        }
+
+        .footer-contact {
+            flex: 1;
+        }
+
+        .footer-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff; /* Text color added for better visibility */
+            margin-bottom: 5px; /* Adjusted margin for better spacing */
+        }
+
+        /* Contact details */
+        .footer-contact p {
+            font-size: 14px;
+            margin: 2px 0; /* Adjusted margin for better spacing */
+            color: #fff; /* Text color added for better visibility */
+        }
+
+        /* Copyright section */
+        .footer-copyright {
+            background-color: #001f3f;
+            color: #fff;
+            text-align: left;
+            font-size: 12px; /* Adjusted font size for copyright text */
+        }
+
+        /* Footer picture container */
+        .footer-picture-container {
+            text-align: right;
+            padding-top: 5px; /* Adjust as needed for spacing */
+        }
+
+        .footer-picture-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px; /* Add border-radius for rounded corners */
+        }
+
+
+        #booking-form {
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          padding: 20px;
+          margin-top: 20px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: bold;
+        }
+
+        input,
+        select,
+        button {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 15px;
+          box-sizing: border-box;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 16px;
+        }
+
+        button {
+          background-color: #4CAF50;
+          color: #fff;
+          cursor: pointer;
+        }
+
+        button:hover {
+          background-color: #45a049;
+        }
+
+        #booking-status {
+          margin-top: 20px;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .availability-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 10px;
+        }
+
+        .availability-table th, .availability-table td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: center;
+        }
+
+        .availability-table th {
+          background-color: #f2f2f2;
+        }
+
+        /* New styles for availability status */
+        .available {
+          background-color: #a5d6a7; /* Light green for available */
+          color: #00796b; /* Dark green text */
+        }
+
+        .occupied {
+          background-color: #ef9a9a; /* Light red for occupied */
+          color: #c62828; /* Dark red text */
+        }
+        /* Adjusted styles for the availability container, form, and timetable */
+        .availability-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start; /* Align items at the top */
+        }
+
+        .availability-form {
+          width: 45%; /* Adjust the width as needed */
+        }
+
+        .availability-status {
+          width: 45%; /* Adjust the width as needed */
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <h1>EDIT RESERVATION</h1>
+</header>
+
+
+<!-- Section to check court availability -->
+<section id="check-availability">
+    <h2>Check Court Availability Before Edit</h2>
+    <!-- Add the new container for the form and timetable with adjusted styles -->
+    <div id="availability-container" class="availability-container">
+        <!-- Check Availability Form with adjusted width -->
+        <div id="availability-form" class="availability-form">
+            <label for="check-sport">Select Sport:</label>
+            <select id="check-sport" required>
+                <option value="Badminton">Badminton</option>
+                <option value="Squash">Squash</option>
+                <option value="Tennis">Tennis</option>
+                <!-- Add more sport options as needed -->
+            </select>
+
+            <label for="check-court-number">Select Court:</label>
+            <select id="check-court-number" required>
+                <!-- Generate court options -->
+                <!-- You can adjust the number of courts based on your specific facility -->
+                <option value="1">Court 1</option>
+                <option value="2">Court 2</option>
+                <option value="3">Court 3</option>
+                <option value="4">Court 4</option>
+                <option value="5">Court 5</option>
+                <option value="6">Court 6</option>
+                <option value="7">Court 7</option>
+                <option value="8">Court 8</option>
+                <!-- Add more options as needed -->
+            </select>
+
+            <label for="check-date">Select Date:</label>
+            <input type="date" id="check-date" required>
+
+            <button onclick="checkAvailability()">Check Availability</button>
+        </div>
+
+        <!-- Availability Timetable with adjusted width -->
+        <div id="availability-status" class="availability-status">
+            <!-- Timetable will be dynamically generated here -->
+        </div>
+    </div>
+</section>
+
+<!-- Section to edit booking -->
+<section id="edit-booking">
+    <h2>Edit Your Reservation</h2>
+
+    <div id="booking-form">
+        <label for="booking-date">Select Date:</label>
+        <input type="date" id="booking-date" required>
+
+        <input type="hidden" id="user_id" name="user_id" value="userID">
+        <input type="hidden" id="bookID" name="bookID">
+        <script>
+            ("DOMContentLoaded", function () {
+               let currentIndex = 0;
+               const announcements = document.querySelectorAll('.announcement');
+               const totalAnnouncements = announcements.length;
+
+               function changeAnnouncement() {
+                 const nextIndex = (currentIndex + 1) % totalAnnouncements;
+                 announcements[currentIndex].style.transform = `translateX(-${100 * nextIndex}%)`;
+                 announcements[nextIndex].style.transform = `translateX(-${100 * nextIndex}%)`;
+                 currentIndex = nextIndex;
+               }
+
+               setInterval(changeAnnouncement, 5000); // Change announcement every 5 seconds
+
+               /* Get the userID from the URL
+               var userID = getParameterByName('userID');
+               console.log("UserID:", userID);*/
+
+
+               // Set the user_id value in the hidden input field
+               document.getElementById("user_id").value = userID;
+
+               console.log(user_id);
+             });
+
+             // Function to get a parameter from the URL by name
+             function getParameterByName(name, url) {
+               if (!url) url = window.location.href;
+               name = name.replace(/[\[\]]/g, "\\$&");
+               var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                 results = regex.exec(url);
+               if (!results) return null;
+               if (!results[2]) return '';
+               return decodeURIComponent(results[2].replace(/\+/g, " "));
+             }
+
+        </script>
+
+
+        <label for="booking-time">Select Time:</label>
+        <select id="booking-time" required>
+            <!-- Generate time slots from 8 am to 8 pm with 1-hour intervals -->
+            <!-- You can adjust this based on your specific needs -->
+            <option value="8:00">8 am - 9 am</option>
+            <option value="9:00">9 am - 10 am</option>
+            <option value="10:00">10 am - 11 am</option>
+            <option value="11:00">11 am - 12 pm</option>
+            <option value="12:00">12 noon - 1 pm</option>
+            <option value="13:00">1 pm - 2 pm</option>
+            <option value="14:00">2 pm - 3 pm</option>
+            <option value="15:00">3 pm - 4 pm</option>
+            <option value="16:00">4 pm - 5 pm</option>
+            <option value="17:00">5 pm - 6 pm</option>
+            <option value="18:00">6 pm - 7 pm</option>
+            <option value="19:00">7 pm - 8 pm</option>
+            <!-- Add more options as needed -->
+        </select>
+
+        <!-- New element to display the formatted time -->
+        <div id="formatted-time"></div>
+
+        <label for="sport-type">Select Sport:</label>
+        <select id="sport-type" required>
+            <option value="Badminton">Badminton</option>
+            <option value="Squash">Squash</option>
+            <option value="Tennis">Tennis</option>
+            <!-- Add more sport options as needed -->
+        </select>
+
+        <label for="court-number">Select Court:</label>
+        <select id="court-number" required>
+            <!-- Generate court options -->
+            <!-- You can adjust the number of courts based on your specific facility -->
+            <option value="1">Court 1</option>
+            <option value="2">Court 2</option>
+            <option value="3">Court 3</option>
+            <option value="4">Court 4</option>
+            <option value="5">Court 5</option>
+            <option value="6">Court 6</option>
+            <option value="7">Court 7</option>
+            <option value="8">Court 8</option>
+            <!-- Add more options as needed -->
+        </select>
+
+        <button onclick="editReservation()">Edit Reservation</button>
+    </div>
+
+    <div id="booking-status"></div>
+</section>
+
+<footer style="background-color: #001f3f; margin: 0; padding: 0;">
+    <!-- ... (Your existing footer content) ... -->
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+            // Function to get a parameter from the URL by name
+            function getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            // Get the bookID from the URL
+            var bookID = getParameterByName('bookID');
+
+            // Set the bookID value in the hidden input field
+            document.getElementById("bookID").value = bookID;
+
+            console.log(bookID);
+
+            // Fetch existing booking details based on bookID using AJAX
+            var bookingDetailsRequest = new XMLHttpRequest();
+            bookingDetailsRequest.onreadystatechange = function () {
+              if (bookingDetailsRequest.readyState === XMLHttpRequest.DONE) {
+                if (bookingDetailsRequest.status === 200) {
+                  var bookingDetails = JSON.parse(bookingDetailsRequest.responseText);
+
+                  // Check the original date format
+                  console.log("Original Date:", bookingDetails.originalDate);
+                  console.log("bookingDetails.sportNo", bookingDetails.courtNo);
+
+
+                  // Update form fields with retrieved data
+                  document.getElementById('booking-date').value = bookingDetails.originalDate;
+                  document.getElementById('booking-time').value = formatTimeSlot(bookingDetails.startTime);
+                  document.getElementById('sport-type').value = bookingDetails.sportName;
+                  document.getElementById('court-number').value = bookingDetails.courtNo;
+                } else {
+                  console.error("Error fetching booking details: " + bookingDetailsRequest.status);
+                }
+              }
+            };
+
+            bookingDetailsRequest.open('GET', 'php/get_booking.php?bookID=' + bookID, true);
+            bookingDetailsRequest.send();
+
+            // Fetch userID based on bookID using AJAX
+            var userIDRequest = new XMLHttpRequest();
+            userIDRequest.onreadystatechange = function () {
+                if (userIDRequest.readyState === XMLHttpRequest.DONE) {
+                    if (userIDRequest.status === 200) {
+                      var userIDResponse = JSON.parse(userIDRequest.responseText);
+                      var userID = userIDResponse.userID;
+                        // Update the href attributes with the userID
+                        var homeLink = document.getElementById('homeLink');
+                        var manageaccLink = document.getElementById('manageaccLink');
+                        var managebookingLink = document.getElementById('managebookingLink');
+
+                        if (homeLink) {
+                            homeLink.href = "main.html?userID=" + userID;
+                        }
+
+                        if (manageaccLink) {
+                            manageaccLink.href = "admin_editB.html?userID=" + userID;
+                        }
+
+                        if (managebookingLink) {
+                            managebookingLink.href = "admin_edit.html?userID=" + userID;
+                        }
+                    } else {
+                        console.error("Error fetching userID: " + userIDRequest.status);
+                    }
+                }
+            };
+
+            userIDRequest.open('GET', 'php/get_userID.php?bookID=' + bookID, true);
+            userIDRequest.send();
+        });
+
+    // Function to format date in dd/mm/yyyy format
+    function formatDate(dateString) {
+      var date = new Date(dateString);
+      var day = date.getDate();
+      var month = date.getMonth() + 1; // Months are zero-based
+      var year = date.getFullYear();
+
+      return day + '/' + month + '/' + year;
+    }
+
+    // Function to format time slot based on startTime
+    function formatTimeSlot(startTime) {
+      var hour = parseInt(startTime.split(":")[0]);
+      console.log("Original Hour:", hour); // Add this line
+      var formattedHour = hour.toString();
+
+      var formattedTime = formattedHour + ':00';
+
+      console.log("Formatted Time:", formattedTime); // Add this line
+      return formattedTime;
+    }
+
+    // Example JavaScript to dynamically create court and time options
+    const courtsContainer = document.getElementById('courts');
+    const timeSlotsContainer = document.getElementById('time-slots');
+    const bookButton = document.getElementById('book-court');
+
+    function createCourtOptions() {
+        for (let i = 1; i <= 8; i++) {
+        const courtOption = document.createElement('button');
+        courtOption.textContent = `Court ${i}`;
+        courtOption.onclick = () => selectCourt(i);
+        courtsContainer.appendChild(courtOption);
+        }
+    }
+
+    function createTimeSlots() {
+        for (let hour = 8; hour <= 20; hour++) { // 8 AM to 8 PM
+        const timeSlot = document.createElement('button');
+        timeSlot.textContent = `${hour}:00`;
+        timeSlot.onclick = () => selectTimeSlot(hour);
+        timeSlotsContainer.appendChild(timeSlot);
+        }
+    }
+
+    function selectCourt(courtNumber) {
+        console.log(`Court ${courtNumber} selected`);
+        // Update selection and booking button state
+    }
+
+    function selectTimeSlot(time) {
+        console.log(`Time ${time}:00 selected`);
+        // Update selection and booking button state
+    }
+
+    // Initialize the options
+    createCourtOptions();
+    createTimeSlots();
+
+    function checkAvailability() {
+        const sport = document.getElementById('check-sport').value;
+        const courtNumber = document.getElementById('check-court-number').value;
+        const date = document.getElementById('check-date').value;
+
+        // Send an AJAX request to check availability
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            displayAvailability(response);
+            } else {
+            console.error("Error checking availability: " + xhr.status);
+            }
+        }
+        };
+
+        xhr.open('POST', 'php/check_court_availability.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(`sport=${sport}&courtNumber=${courtNumber}&date=${date}`);
+    }
+
+    function displayAvailability(response) {
+        const availabilityStatus = document.getElementById('availability-status');
+        availabilityStatus.innerHTML = ""; // Clear previous status
+
+        // Generate a timetable to display availability
+        const timetable = document.createElement('table');
+        timetable.classList.add('availability-table');
+
+        // Create table header
+        const headerRow = document.createElement('tr');
+        const headerCellTime = document.createElement('th');
+        headerCellTime.textContent = 'Time';
+        headerRow.appendChild(headerCellTime);
+
+        const headerCellStatus = document.createElement('th');
+        headerCellStatus.textContent = 'Availability';
+        headerRow.appendChild(headerCellStatus);
+
+        timetable.appendChild(headerRow);
+
+        // Create table rows
+        for (const slot of response) {
+        const row = document.createElement('tr');
+
+        const timeCell = document.createElement('td');
+        timeCell.textContent = slot.startTime + ' - ' + slot.endTime;
+        row.appendChild(timeCell);
+
+        const statusCell = document.createElement('td');
+        statusCell.textContent = slot.available ? 'Available' : 'Occupied';
+        statusCell.classList.add(slot.available ? 'available' : 'occupied');
+        row.appendChild(statusCell);
+
+        timetable.appendChild(row);
+        }
+
+        availabilityStatus.appendChild(timetable);
+    }
+
+    function redirectToManageBooking() {
+      // Get the bookID from the URL
+      var bookID = getParameterByName('bookID');
+
+      // Fetch userID based on bookID using AJAX
+      var userIDRequest = new XMLHttpRequest();
+      userIDRequest.onreadystatechange = function () {
+        if (userIDRequest.readyState === XMLHttpRequest.DONE) {
+          if (userIDRequest.status === 200) {
+            var userIDResponse = JSON.parse(userIDRequest.responseText);
+            var userID = userIDResponse.userID;
+
+            // Redirect to managebooking_page.html with userID
+            window.location.href = 'admin_booking.html';
+
+          } else {
+            console.error("Error fetching userID: " + userIDRequest.status);
+          }
+        }
+      };
+
+      userIDRequest.open('GET', 'php/get_userID.php?bookID=' + bookID, true);
+      userIDRequest.send();
+    }
+
+    function editReservation() {
+        //const date = document.getElementById('booking-date').value;
+        const originalDate = document.getElementById('booking-date').value;
+        const time = document.getElementById('booking-time').value;
+        const sport = document.getElementById('sport-type').value;
+        const court = document.getElementById('court-number').value;
+        //const userId = document.getElementById('user_id').value;
+        const bookID = document.getElementById('bookID').value; // Add this line to get bookID
+
+        // Format the date for server in "yyyy-MM-dd" format
+        const formattedDate = formatDateForServer(originalDate);
+
+        // Send an AJAX request to check availability
+        const availabilityXhr = new XMLHttpRequest();
+        availabilityXhr.onreadystatechange = function () {
+            if (availabilityXhr.readyState === XMLHttpRequest.DONE) {
+                if (availabilityXhr.status === 200) {
+                    const response = JSON.parse(availabilityXhr.responseText);
+                    if (response.available) {
+                        // If the slot is available, proceed with the booking
+                        // Create a FormData object and append form data
+                        // Create a FormData object and append form data
+                        const formData = new FormData();
+                        //formData.append("user_id", userId);
+                        formData.append("booking-date", formattedDate);
+                        //formData.append("booking-date", date);
+                        formData.append("booking-time", time);
+                        formData.append("sport-type", sport);
+                        formData.append("court-number", court);
+                        formData.append("bookID", bookID); // Include the bookID
+
+                        // Send an AJAX request to edit the booking
+                        const bookingXhr = new XMLHttpRequest();
+                        bookingXhr.open('POST', 'php/edit_booking.php', true);
+                        bookingXhr.onload = function () {
+    if (bookingXhr.status === 200) {
+        /* Handle the successful response */
+        // Display the success message using alert
+        alert("Edit Successfully!\nClick \"OK\" to view your booking.");
+
+        // Redirect to admin_booking.html after successful edit
+        window.location.href = 'admin_booking.html';
+    } else {
+        // Handle errors
+        alert("Error: " + bookingXhr.statusText);
+    }
+};
+
+                        bookingXhr.send(formData);
+                    } else {
+                        // Display a message indicating the slot is not available
+                        const bookingStatus = document.getElementById('booking-status');
+                        bookingStatus.textContent = "Error: Slot already booked. Please choose another time or court.";
+                    }
+                } else {
+                    console.error("Error checking availability: " + availabilityXhr.status);
+                }
+            }
+        };
+
+        availabilityXhr.open('POST', 'php/check_availability.php', true);
+        availabilityXhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        // Include userID in the data sent to the server
+        availabilityXhr.send(`date=${formattedDate}&time=${time}&sport=${sport}&court=${court}&bookID=${bookID}`);
+    }
+
+    // Function to format date for server in "yyyy-MM-dd" format
+    function formatDateForServer(dateString) {
+        const date = new Date(dateString);
+        const yyyy = date.getFullYear();
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const dd = String(date.getDate()).padStart(2, '0');
+        return `${yyyy}-${mm}-${dd}`;
+    }
+</script>
+
+<footer style="background-color: #001f3f; margin: 0; padding: 0;">
+    <div class="footer-bar"></div>
+    <div class="footer-content" style="padding: 10px 1cm 10px 0;">
+        <div class="footer-contact">
+            <p class="footer-title" style="font-size: 16px; font-weight: bold; color: #fff; margin-left: 1cm;">SPORTS CENTRE</p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">UNIVERSITI UTARA MALAYSIA </p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">06010 Sintok</p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">Kedah Darul Aman, Malaysia</p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">&phone; +604-928 3560</p>
+        </div>
+
+        <div class="footer-picture-container">
+            <img src="img/footer.png" alt="Footer Picture" title="Footer Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+        </div>
+    </div>
+
+    <div class="footer-copyright" style="padding: 5px 1cm;">
+        <p style="margin: 0; font-size: 12px;">&copy; 2022 Universiti Utara Malaysia</p>
+    </div>
+</footer>
+</body>
+
+</html>

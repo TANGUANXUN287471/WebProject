@@ -410,29 +410,48 @@ footer {
            window.location.href = `admin_editU.html?userID=${userID}`;
        }
 
-       function deleteUser(userID) {
-           // Implement deletion logic (you need to implement this)
-           // Example:
-           // fetch('php/delete_user.php', {
-           //     method: 'POST',
-           //     headers: {
-           //         'Content-Type': 'application/json',
-           //     },
-           //     body: JSON.stringify({ userID: userID }),
-           // })
-           // .then(response => response.json())
-           // .then(result => {
-           //     if (result.success) {
-           //         alert('User deleted successfully.');
-           //         loadUsers(); // Refresh the user list after deletion
-           //     } else {
-           //         alert('Failed to delete user.');
-           //     }
-           // });
+function deleteUser(userID) {
+    console.log("Deleting user with userID:", userID);
 
-           // Dummy data for testing
-           alert(`Delete user with ID ${userID}`);
-       }
+    // Check if userID is available
+    if (userID) {
+        // Ask for confirmation
+        const confirmation = window.confirm("Do you really want to delete the account?");
+
+        if (confirmation) {
+            console.log("User confirmed deletion.");
+
+            // Create a FormData object and append the userID
+            const formData = new FormData();
+            formData.append("userID", userID);
+
+            // Create an AJAX request to delete_user.php
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "php/delete_user.php", true);
+            xhr.onload = function () {
+    console.log("Response from delete_user.php:", xhr.responseText);
+
+    if (xhr.status === 200) {
+        // Reload the page after successful deletion
+        window.location.reload();
+    } else {
+        // Handle errors
+        console.error("Error: " + xhr.statusText);
+    }
+};
+
+
+            xhr.send(formData);
+        } else {
+            console.log("User canceled deletion.");
+        }
+    } else {
+        alert("UserID not provided.");
+    }
+}
+
+
+
        function viewBooking(userID) {
                // Redirect to the admin_editB.html for the specified user
                window.location.href = `admin_editB.html?userID=${userID}`;

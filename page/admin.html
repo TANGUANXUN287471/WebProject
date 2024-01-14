@@ -7,6 +7,7 @@
     <title>Admin Page</title>
     <!-- Add Bootstrap CSS link here -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-+q1HpfrG1XffOvXsViMEl6DI8BLxtnBlY//gtkBX8cucACmCXOOvFnQwAp0PAWHaIXz5p0jDPpXZTJhBwrGQmw==" crossorigin="anonymous" />
 
     <style>
         /* Add your custom styles here */
@@ -261,10 +262,20 @@ footer {
 
     <div class="container">
         <div class="big-button-container">
-            <div class="big-button" onclick="viewUserInfo()">View User Info</div>
-            <div class="big-button" onclick="adjustCourtAvailability()">Adjust Court Availability</div>
-            <div class="big-button" onclick="viewBookingInfo()">View Booking Info</div>
-            <div class="big-button" onclick="viewGameInfo()">View Game Info</div>
+            <div class="big-button" onclick="viewUserInfo()">
+                <i class="fas fa-users" style="color: #007bff;"></i> View User Info
+            </div>
+            <div class="big-button" onclick="adjustCourtAvailability()">
+                <i class="fas fa-calendar-alt" style="color: #007bff;"></i> Adjust Court Availability
+            </div>
+        </div>
+        <div class="big-button-container">
+            <div class="big-button" onclick="viewBookingInfo()">
+                <i class="fas fa-book" style="color: #007bff;"></i> View Booking Info
+            </div>
+            <div class="big-button" onclick="viewGameInfo()">
+                <i class="fas fa-gamepad" style="color: #007bff;"></i> View Game Info
+            </div>
         </div>
 
         <script>
@@ -276,7 +287,7 @@ footer {
 
             function adjustCourtAvailability() {
         // Redirect to admin_booking.html for adjusting court availability
-        window.location.href = 'admin_booking.html';
+        window.location.href = 'admin_court.html';
     }
 
             function viewBookingInfo() {
