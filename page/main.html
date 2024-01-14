@@ -26,99 +26,101 @@
       font-family: Arial, sans-serif;
     }
     .navbar {
-  display: flex;
-  justify-content: space-between;
-  background-color: #001f3f;
-  color: white;
-  padding: 10px;
-}
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      background-color: #001f3f;
+      color: white;
+      padding: 10px;
+    }
 
-.navbar img {
-  width: 200px;
-  height: auto; /* Adjust as necessary for your logo */
-}
+    .navbar img {
+      width: 200px;
+      height: auto; /* Adjust as necessary for your logo */
+    }
 
-.navbar a {
-  color: white;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color 0.3s;
-  border: 2px solid transparent; /* Adds a transparent border to maintain layout on hover */
-  position: relative;
-  border-radius: 5px; /* Rounded corners */
-}
+    .navbar a {
+      font-weight: bold;
+      color: white;
+      padding: 8px 16px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      border: 2px solid transparent; /* Adds a transparent border to maintain layout on hover */
+      position: relative;
+      border-radius: 5px; /* Rounded corners */
+    }
 
-.navbar a:hover {
-  background-color: #ffcc00; /* Black background on hover */
-  color: rgb(15, 1, 1);
-  border: 2px solid #fff; /* Adds a border on hover */
-}
+    .navbar a:hover {
+      background-color: #ffcc00; /* Black background on hover */
+      color: rgb(15, 1, 1);
+      border: 2px solid #fff; /* Adds a border on hover */
+    }
 
 
-.navbar .button {
-  background-color: #f2f2f2;
-  color: #333;
-  border-radius: 50px; /* Rounded corners */
-  font-weight: bold;
-  display: inline-block;
-  padding: 10px 20px;
-  margin-left: 10px; /* Adjust margin for spacing */
-}
+    .navbar .button {
+      background-color: #f2f2f2;
+      color: #333;
+      border-radius: 50px; /* Rounded corners */
+      font-weight: bold;
+      display: inline-block;
+      padding: 10px 20px;
+      margin-left: 10px; /* Adjust margin for spacing */
+    }
 
-.navbar .button.sign-up {
-  background-color: #4CAF50; /* Green background for sign up */
-  color: white;
-}
+    .navbar .button.sign-up {
+      background-color: #4CAF50; /* Green background for sign up */
+      color: white;
+    }
 
-.navbar .button.log-in {
-  background-color: #555; /* Darker background for log in */
-  color: white;
-}
-   /* Styles for the hero section */
-   .hero {
-  position: relative;
-  overflow: hidden;
-  text-align: left;
-  background: url('../img/sportscenter-01.png') no-repeat center center;
-  background-size: cover;
-  color: white;
-  padding: 160px;
-}
+    .navbar .button.log-in {
+      background-color: #555; /* Darker background for log in */
+      color: white;
+    }
+      /* Styles for the hero section */
+      .hero {
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+      background: url('../img/sportscenter-01.png') no-repeat center center;
+      background-size: cover;
+      color: white;
+      padding: 160px;
+    }
 
-.sports-image {
-  width: 100%;
-  height: auto;
-  opacity: 0; /* Make sure the default image is visible */
-  animation: imageFade 10s infinite alternate; /* Use alternate to make the animation go back and forth */
-}
+    .sports-image {
+      width: 100%;
+      height: auto;
+      opacity: 0; /* Make sure the default image is visible */
+      animation: imageFade 10s infinite alternate; /* Use alternate to make the animation go back and forth */
+    }
 
-.sports-image-hover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0; /* Initially hide the second image */
-  width: 100%;
-  height: auto;
-}
+    .sports-image-hover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0; /* Initially hide the second image */
+      width: 100%;
+      height: auto;
+    }
 
-/* Keyframes for the fade animation */
-@keyframes imageFade {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
+    /* Keyframes for the fade animation */
+    @keyframes imageFade {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
 
-.hero:hover .sports-image {
-  animation: none; /* Stop the animation on hover */
-  opacity: 0; /* Hide the default image on hover */
-}
+    .hero:hover .sports-image {
+      animation: none; /* Stop the animation on hover */
+      opacity: 0; /* Hide the default image on hover */
+    }
 
-.hero:hover .sports-image-hover {
-  opacity: 1; /* Show the second image on hover */
-}
+    .hero:hover .sports-image-hover {
+      opacity: 1; /* Show the second image on hover */
+    }
 
     .court-list {
       display: flex;
@@ -216,7 +218,7 @@
     text-align: left;
     justify-content: flex-start;
     align-items: flex-start;
-}
+  }
 
     .footer-contact {
         flex: 1;

@@ -9,46 +9,83 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Arial', sans-serif;
       background-color: #f8f9fa;
       margin: 0;
     }
 
-    .navbar {
-      overflow: hidden;
-      text-align: center;
-      padding: 15px;
-      margin-left: 0.3cm;
-      margin-right: 0.3cm;
-      border-top-left-radius: 0;
-      /* Rounded top-left corner */
-      border-top-right-radius: 0;
-      /* Rounded top-right corner */
-      border-bottom-left-radius: 10px;
-      /* Square bottom-left corner */
-      border-bottom-right-radius: 10px;
-      /* Square bottom-right corner */
-    }
+    /* Add or modify the following styles in your existing CSS */
+.navbar {
+  overflow: hidden;
+  text-align: center;
+  padding: 15px;
+  margin-left: 0.3cm;
+  margin-right: 0.3cm;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  margin-top: 0px; /* Add some top margin for separation */
+}
+
+.nav-buttons a {
+  color: white;
+  text-decoration: none;
+  padding: 0px 5px;
+  margin: 0 2px; /* Adjust spacing between buttons */
+  border: 2px solid transparent;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.nav-buttons a:hover {
+  background-color: #ffcc00;
+  color: rgb(15, 1, 1);
+  border: 2px solid #fff;
+}
+
+/* Add these styles to ensure consistent button appearance */
+.nav-buttons a:first-child {
+  margin-left: 0; /* Remove left margin for the first button */
+}
+
+.nav-buttons a:last-child {
+  margin-right: 0; /* Remove right margin for the last button */
+}
+    
 
     header {
+      font-weight: bold;
       background-color: #050531;
       /* Green background color */
       color: #ffcc00;
       /* White text color */
       text-align: center;
-      padding: 20px 0;
+      padding: 0px 0;
       position: relative;
       top: 0;
       z-index: 999;
       transition: background-color 0.3s;
       margin-bottom: 10px;
-      border-radius: 20px;
+      
       box-shadow: 0 0 100px rgba(0, 0, 0, 0.2);
     }
   
 
     h1 {
+      font-weight: bold;
       color: #ffcc00;
       text-align: center;
     }
@@ -163,9 +200,15 @@
 
 <body>
 
-  <!-- Display user information -->
-  <header class="navbar">
-    <h1>View Your Account</h1>
+  <header>
+    <nav class="navbar">
+      <h1>View Your Account</h1>
+      <div class="nav-buttons">
+        <a href="main.html" id="homeLink">Home</a>
+        <a href="managebooking_page.html" id="managebookingLink">My Reservation</a>
+        <a href="index.html">Log Out</a>
+      </div>
+    </nav>
   </header>
 
   <div class="center-container">
@@ -181,6 +224,17 @@
       <input type="hidden" id="user_id" name="user_id" value="userID">
       <script>
         document.addEventListener("DOMContentLoaded", function () {
+          // Function to get a parameter from the URL by name
+          function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+              results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+          }
+
           let currentIndex = 0;
           const announcements = document.querySelectorAll('.announcement');
           const totalAnnouncements = announcements.length;
@@ -193,18 +247,21 @@
           document.getElementById("user_id").value = userID;
 
           console.log(userID);
+
+          // Update the href attributes with the userID
+          var homeLink = document.getElementById('homeLink');
+          var managebookingLink = document.getElementById('managebookingLink');
+
+          if (homeLink) {
+              homeLink.href = "main.html?userID=" + userID;
+          }
+
+          if (managebookingLink) {
+            managebookingLink.href = "managebooking_page.html?userID=" + userID;
+          }
         });
 
-        // Function to get a parameter from the URL by name
-        function getParameterByName(name, url) {
-          if (!url) url = window.location.href;
-          name = name.replace(/[\[\]]/g, "\\$&");
-          var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-          if (!results) return null;
-          if (!results[2]) return '';
-          return decodeURIComponent(results[2].replace(/\+/g, " "));
-        }
+      
       </script>
       <div class="edit-delete-buttons">
         <button onclick="viewProfile()" class="btn btn-primary">View Profile</button>
