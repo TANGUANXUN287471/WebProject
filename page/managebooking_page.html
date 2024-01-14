@@ -15,6 +15,9 @@
     }
 
     body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       font-family: 'Arial', sans-serif;
       background-color: #f8f9fa;
       margin: 0;
@@ -89,6 +92,7 @@
 
     /* Section styles */
     section {
+      flex-grow: 1;
       background-color: #fff; /* White background color for sections */
       padding: 20px;
       margin: 20px;
@@ -364,23 +368,30 @@
             // Clear existing rows from the table
             tbody.innerHTML = "";
 
-            // Loop through the received bookings and create table rows
-            for (var i = 0; i < bookings.length; i++) {
-                var booking = bookings[i];
-                var row = "<tr>" +
-                    "<td>" + booking.bookingNo + "</td>" +  // Change to bookingNo
-                    "<td>" + booking.bookID + "</td>" +    // Change to bookID
-                    "<td>" + booking.sportName + "</td>" +
-                    "<td>" + booking.courtNo + "</td>" +
-                    "<td>" + formatDate(booking.bookDate) + "</td>" +
-                    "<td>" + formatTimeSlot(booking.startTime, booking.endTime) + "</td>" +
-                    "<td class='action-buttons'>" +
-                    "<button class='edit-button' onclick='editBooking(" + booking.bookID + ")'>Edit</button>" +
-                    "<button class='delete-button' onclick='deleteBooking(" + booking.bookID + ")'>Delete</button>" +
-                    "</td>" +
-                    "</tr>";
-                // Append the row to the table body
-                tbody.innerHTML += row;
+            if (bookings.length === 0) {
+              document.querySelector("#booking-table thead").style.display = 'none';
+              // If no bookings, display a message
+              var noRecordRow = "<tr><td colspan='7' style='text-align: center;'>No Record. You may go to the Home page to make your reservation.</td></tr>";
+              tbody.innerHTML = noRecordRow;
+            } else {
+                // Loop through the received bookings and create table rows
+                for (var i = 0; i < bookings.length; i++) {
+                    var booking = bookings[i];
+                    var row = "<tr>" +
+                        "<td>" + booking.bookingNo + "</td>" +  // Change to bookingNo
+                        "<td>" + booking.bookID + "</td>" +    // Change to bookID
+                        "<td>" + booking.sportName + "</td>" +
+                        "<td>" + booking.courtNo + "</td>" +
+                        "<td>" + formatDate(booking.bookDate) + "</td>" +
+                        "<td>" + formatTimeSlot(booking.startTime, booking.endTime) + "</td>" +
+                        "<td class='action-buttons'>" +
+                        "<button class='edit-button' onclick='editBooking(" + booking.bookID + ")'>Edit</button>" +
+                        "<button class='delete-button' onclick='deleteBooking(" + booking.bookID + ")'>Delete</button>" +
+                        "</td>" +
+                        "</tr>";
+                    // Append the row to the table body
+                    tbody.innerHTML += row;
+                }
             }
         }
 
