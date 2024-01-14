@@ -17,36 +17,68 @@
     margin: 0;
 }
 header {
-  background-color: #050531; /* Green background color */
-  color: #fff; /* White text color */
+      font-weight: bold;
+      background-color: #050531;
+      /* Green background color */
+      color: #ffcc00;
+      /* White text color */
+      text-align: center;
+      padding: 0px 0;
+      position: relative;
+      top: 0;
+      z-index: 999;
+      transition: background-color 0.3s;
+      margin-bottom: 10px;
+      box-shadow: 0 0 100px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-weight: bold;
+      color: #ffcc00;
+      text-align: center;
+    }
+.navbar {
+  overflow: hidden;
   text-align: center;
-  padding: 15px 0; /* Adjusted padding for the header */
-  position: relative;
-  top: 0;
-  z-index: 999;
+  padding: 15px;
+  margin-left: 0.3cm;
+  margin-right: 0.3cm;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  margin-top: 0px; /* Add some top margin for separation */
+}
+
+.nav-buttons a {
+  color: white;
+  text-decoration: none;
+  padding: 0px 5px;
+  margin: 0 2px; /* Adjust spacing between buttons */
+  border: 2px solid transparent;
+  border-radius: 5px;
   transition: background-color 0.3s;
 }
 
-h1 {
-  color: #ffcc00;
-  text-align: center;
-  margin: 0; /* Remove margin to match the "Sign Up" header */
+.nav-buttons a:hover {
+  background-color: #ffcc00;
+  color: rgb(15, 1, 1);
+  border: 2px solid #fff;
 }
-.navbar {
-      overflow: hidden;
-      text-align: center;
-      padding: 15px;
-      margin-left: 0.3cm;
-      margin-right: 0.3cm;
-      border-top-left-radius: 0;
-      /* Rounded top-left corner */
-      border-top-right-radius: 0;
-      /* Rounded top-right corner */
-      border-bottom-left-radius: 10px;
-      /* Square bottom-left corner */
-      border-bottom-right-radius: 10px;
-      /* Square bottom-right corner */
-    }
+
+/* Add these styles to ensure consistent button appearance */
+.nav-buttons a:first-child {
+  margin-left: 0; /* Remove left margin for the first button */
+}
+
+.nav-buttons a:last-child {
+  margin-right: 0; /* Remove right margin for the last button */
+}
 
 .container {
     flex: 1; /* Make the container grow to fill available space */
@@ -218,9 +250,13 @@ footer {
 </head>
 
 <body>
-
-    <header class="navbar">
-        <h1>ADMIN PAGE</h1>
+    <header>
+        <nav class="navbar">
+          <h1>ADMIN PAGE</h1>
+          <div class="nav-buttons">
+            <a href="index.html">Log Out</a>
+          </div>
+        </nav>
       </header>
 
     <div class="container">
