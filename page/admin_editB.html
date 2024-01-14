@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Reservation</title>
+    <style>
+        /* Add your additional styles for the Manage Booking page */
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+header {
+  background-color: #050531; /* Green background color */
+  color: #fff; /* White text color */
+  text-align: center;
+  padding: 15px 0; /* Adjusted padding for the header */
+  position: relative;
+  top: 0;
+  z-index: 999;
+  transition: background-color 0.3s;
+}
+
+h1 {
+  color: #ffcc00;
+  text-align: center;
+  margin: 0; /* Remove margin to match the "Sign Up" header */
+}
+.navbar {
+      overflow: hidden;
+      text-align: center;
+      padding: 15px;
+      margin-left: 0.3cm;
+      margin-right: 0.3cm;
+      border-top-left-radius: 0;
+      /* Rounded top-left corner */
+      border-top-right-radius: 0;
+      /* Rounded top-right corner */
+      border-bottom-left-radius: 10px;
+      /* Square bottom-left corner */
+      border-bottom-right-radius: 10px;
+      /* Square bottom-right corner */
+    }
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f8f9fa;
+          color: #333;
+          line-height: 1.6;
+        }
+
+
+
+        a {
+          text-decoration: none;
+          color: #0077cc;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+
+        /* Header styles */
+       header {
+          background-color: #050531;
+          color: #fff;
+          text-align: center;
+          padding: 15px 0;
+          position: relative;
+          top: 0;
+          z-index: 999;
+          transition: background-color 0.3s;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-left: 1cm;
+          padding-right: 1cm;
+        }
+
+        h1 {
+          color: #ffcc00;
+          text-align: center;
+          margin: 0;
+        }
+
+        .back-button {
+          background-color: yellow;
+          padding: 5px 10px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-right: 10px;
+        }
+
+        .back-button:hover {
+          background-color: #ffd700; /* Darker yellow on hover */
+        }
+
+        .back-icon {
+          margin-right: 5px;
+        }
+
+        .navbar {
+          overflow: hidden;
+          text-align: center;
+          padding: 15px;
+          margin-left: 0.3cm;
+          margin-right: 0.3cm;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border-bottom-left-radius: 10px;
+          border-bottom-right-radius: 10px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        }
+
+
+        header h1 {
+          font-size: 28px; /* Increase font size for main title */
+          margin-bottom: 10px;
+          font-weight: bold; /* Add bold font for main title */
+        }
+
+        /* Navigation menu styles */
+        nav {
+        background-color: #333; /* Dark background color for the menu */
+        padding: 10px 0;
+        margin-left: 0.3cm;
+        margin-right: 0.3cm;
+        text-align: center;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        border-top-left-radius: 0; /* Rounded top-left corner */
+        border-top-right-radius: 0; /* Rounded top-right corner */
+        border-bottom-left-radius: 5px; /* Square bottom-left corner */
+        border-bottom-right-radius: 5px; /* Rounded corners for the navbar */
+        }
+
+        nav a {
+        margin-right: 20px;
+        color: #fff; /* White text color for menu items */
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 20px; /* Add padding to menu items */
+        border-radius: 10px; /* Rounded corners for the menu items */
+        transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+          background-color: #4CAF50; /* Green background color on hover */
+          color: #fff; /* White text color on hover */
+        }
+
+        /* Section styles */
+        section {
+          background-color: #fff; /* White background color for sections */
+          padding: 20px;
+          margin: 20px;
+          border-radius: 8px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        section h2 {
+          font-size: 24px; /* Adjust font size for section titles */
+          margin-bottom: 10px;
+        }
+
+        /* Styles for the table */
+        #booking-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+        }
+
+        #booking-table th, #booking-table td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: center;
+        }
+
+        #booking-table th {
+          background-color: #f2f2f2;
+        }
+
+        /* Styles for the action buttons */
+        .action-buttons {
+          display: flex;
+          justify-content: space-around;
+        }
+
+        .edit-button, .delete-button {
+          padding: 5px 10px;
+          margin: 5px;
+          cursor: pointer;
+          border: none;
+          border-radius: 4px;
+          transition: background-color 0.3s, color 0.3s;
+        }
+
+        .edit-button:hover {
+          background-color: #4CAF50;
+          color: #fff;
+        }
+
+        .delete-button:hover {
+          background-color: #f44336;
+          color: #fff;
+        }
+
+        .footer-bar {
+            background-color: #001f3f;
+            height: 3px;
+            margin: 0;
+        }
+
+        /* Footer content styles */
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Align items vertically in the center */
+        }
+
+        .footer-contact {
+            flex: 1;
+        }
+
+        .footer-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff; /* Text color added for better visibility */
+            margin-bottom: 5px; /* Adjusted margin for better spacing */
+        }
+
+        /* Contact details */
+        .footer-contact p {
+            font-size: 14px;
+            margin: 2px 0; /* Adjusted margin for better spacing */
+            color: #fff; /* Text color added for better visibility */
+        }
+
+        /* Copyright section */
+        .footer-copyright {
+            background-color: #001f3f;
+            color: #fff;
+            text-align: left;
+            font-size: 12px; /* Adjusted font size for copyright text */
+        }
+
+        /* Footer picture container */
+        .footer-picture-container {
+            text-align: right;
+            padding-top: 5px; /* Adjust as needed for spacing */
+        }
+
+        .footer-picture-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px; /* Add border-radius for rounded corners */
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+    <button class="back-button" onclick="goBack()">
+        <span class="back-icon">&#8592;</span> Back
+    </button>
+    <h1>Manage User Reservation</h1>
+</header>
+
+<section id="manage-bookings">
+    <h2> User Reservation</h2>
+
+    <!-- Display Table for Bookings -->
+    <table id="booking-table">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Booking ID</th>
+            <th>Sport Type</th>
+            <th>Court Number</th>
+            <th>Booked Date</th>
+            <th>Booked Time Slot</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Sample data, replace with dynamic data from the server -->
+        <tr>
+            <td>1</td>
+            <td>29</td>
+            <td>Badminton</td>
+            <td>1</td>
+            <td>2024-01-20</td>
+            <td>08:00:00 - 09:00:00</td>
+            <td class="action-buttons">
+                <button class="edit-button" onclick="editBooking(1)">Edit</button>
+                <button class="delete-button" onclick="deleteBooking(1)">Delete</button>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>27</td>
+            <td>Squash</td>
+            <td>1</td>
+            <td>2024-01-10</td>
+            <td>08:00:00 - 09:00:00</td>
+            <td class="action-buttons">
+                <button class="edit-button" onclick="editBooking(2)">Edit</button>
+                <button class="delete-button" onclick="deleteBooking(2)">Delete</button>
+            </td>
+        </tr>
+        <!-- Add more rows for additional bookings -->
+        </tbody>
+    </table>
+</section>
+
+<script>
+
+    function goBack() {
+        window.history.back();
+    }
+
+    function formatDate(dateString) {
+        // Assuming dateString is in the format "YYYY-MM-DD"
+        var parts = dateString.split("-");
+        if (parts.length === 3) {
+            return parts[2] + "/" + parts[1] + "/" + parts[0];
+        } else {
+            return dateString; // Return the original string if the format is not as expected
+        }
+    }
+
+    function formatTimeSlot(startTime, endTime) {
+        // Assuming startTime and endTime are in the format "HH:mm:ss"
+        var startParts = startTime.split(":");
+        var endParts = endTime.split(":");
+
+        var formattedStartTime = formatHour(parseInt(startParts[0])) + " " + getAMPM(parseInt(startParts[0]));
+        var formattedEndTime = formatHour(parseInt(endParts[0])) + " " + getAMPM(parseInt(endParts[0]));
+
+        return formattedStartTime + " - " + formattedEndTime;
+    }
+
+    function formatHour(hour) {
+        // Format the hour to remove leading zero and convert to 12-hour format
+        return (hour % 12 === 0 ? 12 : hour % 12).toString();
+    }
+
+    function getAMPM(hour) {
+        // Determine whether it's AM or PM
+        return hour < 12 ? "am" : "pm";
+    }
+
+    // Functions for edit and delete actions
+    window.editBooking = function(bookID) {
+      // Implement the edit functionality, e.g., redirect to an edit page with the bookingId
+      window.location.href = "editbooking_page.html?bookID=" + bookID;
+    };
+
+    // Global function for delete action
+    window.deleteBooking = function (bookID) {
+      var confirmationModal = confirm("Are you sure you want to delete this booking?");
+      if (confirmationModal) {
+        var deleteXhr = new XMLHttpRequest();
+        deleteXhr.onreadystatechange = function () {
+          if (deleteXhr.readyState == 4) {
+            if (deleteXhr.status == 200) {
+              var response = JSON.parse(deleteXhr.responseText);
+              if (response.success) {
+                alert("Booking deleted successfully!");
+                // Reload the page or update the table after deletion
+                location.reload();
+              } else {
+                console.error("Failed to delete booking. Reason: " + response.message);
+              }
+            } else {
+              console.error("Error deleting booking. Status code: " + deleteXhr.status);
+            }
+          }
+        };
+
+        // Make sure to replace 'delete_booking.php' with the correct path to your server-side script
+        deleteXhr.open("POST", "php/delete_booking.php", true);
+        deleteXhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        deleteXhr.send("bookID=" + bookID);
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[[]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+
+      // Get the userID from the URL
+      var userID = getParameterByName('userID');
+
+      // Update the href attributes with the userID
+      var homeLink = document.getElementById('homeLink');
+      var manageaccLink = document.getElementById('manageaccLink');
+
+      if (homeLink) {
+          homeLink.href = "main.html?userID=" + userID;
+      }
+
+      if (manageaccLink) {
+        manageaccLink.href = "manageacc_page.html?userID=" + userID;
+      }
+
+      // AJAX request
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var bookings = JSON.parse(xhr.responseText);
+            // Get the table body element
+            var tbody = document.querySelector("#booking-table tbody");
+
+            // Clear existing rows from the table
+            tbody.innerHTML = "";
+
+            // Loop through the received bookings and create table rows
+            for (var i = 0; i < bookings.length; i++) {
+                var booking = bookings[i];
+                var row = "<tr>" +
+                    "<td>" + booking.bookingNo + "</td>" +  // Change to bookingNo
+                    "<td>" + booking.bookID + "</td>" +    // Change to bookID
+                    "<td>" + booking.sportName + "</td>" +
+                    "<td>" + booking.courtNo + "</td>" +
+                    "<td>" + formatDate(booking.bookDate) + "</td>" +
+                    "<td>" + formatTimeSlot(booking.startTime, booking.endTime) + "</td>" +
+                    "<td class='action-buttons'>" +
+                    "<button class='edit-button' onclick='editBooking(" + booking.bookID + ")'>Edit</button>" +
+                    "<button class='delete-button' onclick='deleteBooking(" + booking.bookID + ")'>Delete</button>" +
+                    "</td>" +
+                    "</tr>";
+                // Append the row to the table body
+                tbody.innerHTML += row;
+            }
+        }
+
+      };
+
+      // Make sure to replace 'view_booking.php' with the correct path to your server-side script
+      xhr.open("GET", "php/view_booking.php?userID=" + userID, true);
+      xhr.send();
+    });
+
+</script>
+
+<footer style="background-color: #001f3f; margin: 0; padding: 0;">
+    <div class="footer-bar"></div>
+    <div class="footer-content" style="padding: 10px 1cm 10px 0;">
+        <div class="footer-contact">
+            <p class="footer-title" style="font-size: 16px; font-weight: bold; color: #fff; margin-left: 1cm;">SPORTS CENTRE</p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">UNIVERSITI UTARA MALAYSIA </p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">06010 Sintok</p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">Kedah Darul Aman, Malaysia</p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">&phone; +604-928 3560</p>
+        </div>
+
+        <div class="footer-picture-container">
+            <img src="img/footer.png" alt="Footer Picture" title="Footer Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+        </div>
+    </div>
+
+    <div class="footer-copyright" style="padding: 5px 1cm;">
+        <p style="margin: 0; font-size: 12px;">&copy; 2022 Universiti Utara Malaysia</p>
+    </div>
+</footer>
+
+</body>
+</html>

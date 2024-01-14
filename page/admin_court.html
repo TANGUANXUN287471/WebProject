@@ -196,96 +196,76 @@ footer {
         border-radius: 5px; /* Add border-radius for rounded corners */
     }
 
-        .big-button-container {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-
-        .big-button {
-            padding: 20px;
-            font-size: 18px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .big-button:hover {
-            background-color: #007bff;
-            color: #fff;
-        }
     </style>
 </head>
 
 <body>
 
-    <header class="navbar">
-        <h1>ADMIN PAGE</h1>
-      </header>
+<header class="navbar">
+    <h1>ADMIN PAGE</h1>
+</header>
 
-    <div class="container">
-        <div class="big-button-container">
-            <div class="big-button" onclick="viewUserInfo()">View User Info</div>
-            <div class="big-button" onclick="adjustCourtAvailability()">Adjust Court Availability</div>
-            <div class="big-button" onclick="viewBookingInfo()">View Booking Info</div>
-            <div class="big-button" onclick="viewGameInfo()">View Game Info</div>
+<div class="container">
+    <h2 class="mt-3 mb-3"></h2>
+
+    <form id="reservationForm">
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label for="viewDate" class="sr-only">Select Date:</label>
+                <input type="date" id="viewDate" name="view_date" class="form-control" required>
+            </div>
+
+            <div class="col-auto">
+                <label for="sportType" class="sr-only">Select Sport Type:</label>
+                <select id="sportType" name="sport_type" class="form-control" required>
+                    <option value="Badminton">Badminton</option>
+                    <option value="Squash">Squash</option>
+                    <option value="Tennis">Tennis</option>
+                </select>
+            </div>
+
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary btn-view" onclick="viewReservations()">View Reservations</button>
+                <button type="button" class="btn btn-primary btn-view" onclick="editReservation()">Edit Reservation</button>
+                <button type="button" class="btn btn-primary btn-view" onclick="deleteReservation()">Delete Reservation</button>
+            </div>
+        </div>
+    </form>
+
+    <div id="reservationTable" class="reservation-table">
+        <!-- Reservation table will be displayed here -->
+    </div>
+</div>
+
+<!-- Add Bootstrap JS and Popper.js scripts here -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // JavaScript code here
+</script>
+
+<footer style="background-color: #001f3f; margin: 0; padding: 0;">
+    <div class="footer-bar"></div>
+    <div class="footer-content" style="padding: 10px 1cm 10px 0;">
+        <div class="footer-contact">
+            <p class="footer-title" style="font-size: 16px; font-weight: bold; color: #fff; margin-left: 1cm;">SPORTS CENTRE</p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">UNIVERSITI UTARA MALAYSIA </p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">06010 Sintok</p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">Kedah Darul Aman, Malaysia</p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">&phone; +604-928 3560</p>
         </div>
 
-        <script>
-            // JavaScript functions for each big button action
-    function viewUserInfo() {
-        // Redirect to admin_users.html for viewing user information
-        window.location.href = 'admin_users.html';
-    }
-
-            function adjustCourtAvailability() {
-        // Redirect to admin_booking.html for adjusting court availability
-        window.location.href = 'admin_booking.html';
-    }
-
-            function viewBookingInfo() {
-                // Add your logic for viewing booking information
-                 window.location.href = 'admin_booking.html';
-            }
-
-            function viewGameInfo() {
-                // Add your logic for viewing game information
-                console.log("View Game Info clicked");
-            }
-        </script>
-
-
+        <div class="footer-picture-container">
+            <img src="img/footer.png" alt="Footer Picture" title="Footer Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+        </div>
     </div>
 
-    <!-- Add Bootstrap JS and Popper.js scripts here -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-        // JavaScript code here
-    </script>
-
-    <footer style="background-color: #001f3f; margin: 0; padding: 0;">
-        <div class="footer-bar"></div>
-        <div class="footer-content" style="padding: 10px 1cm 10px 0;">
-            <div class="footer-contact">
-                <p class="footer-title" style="font-size: 16px; font-weight: bold; color: #fff; margin-left: 1cm;">SPORTS CENTRE</p>
-                <p style="font-size: 14px; color: #fff; margin-left: 1cm;">UNIVERSITI UTARA MALAYSIA </p>
-                <p style="font-size: 14px; color: #fff; margin-left: 1cm;">06010 Sintok</p>
-                <p style="font-size: 14px; color: #fff; margin-left: 1cm;">Kedah Darul Aman, Malaysia</p>
-                <p style="font-size: 14px; color: #fff; margin-left: 1cm;">&phone; +604-928 3560</p>
-            </div>
-
-            <div class="footer-picture-container">
-                <img src="img/footer.png" alt="Footer Picture" title="Footer Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
-            </div>
-        </div>
-
-        <div class="footer-copyright" style="padding: 5px 1cm;">
-            <p style="margin: 0; font-size: 12px;">&copy; 2022 Universiti Utara Malaysia</p>
-        </div>
-    </footer>
+    <div class="footer-copyright" style="padding: 5px 1cm;">
+        <p style="margin: 0; font-size: 12px;">&copy; 2022 Universiti Utara Malaysia</p>
+    </div>
+</footer>
 
 </body>
 

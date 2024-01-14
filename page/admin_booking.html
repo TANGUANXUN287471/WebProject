@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIEW BOOKING</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        /* Add your custom styles here */
+        body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Set minimum height to 100% of the viewport height */
+    margin: 0;
+}
+   header {
+            background-color: #050531;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            position: relative;
+            top: 0;
+            z-index: 999;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 1cm;
+            padding-right: 1cm;
+        }
+
+        .back-button {
+            background-color: yellow;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .back-button:hover {
+            background-color: #ffd700; /* Darker yellow on hover */
+        }
+
+        .back-icon {
+            margin-right: 5px;
+        }
+
+        .navbar h1 {
+            margin: 0; /* Reset margin for h1 inside .navbar */
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-left: 20px; /* Adjust the margin to create distance */
+            margin-top: 20px;
+        }
+
+        #searchInput {
+            padding: 5px 30px 5px 10px; /* Adjust padding for better visual alignment */
+            border-radius: 5px;
+            border: 1px solid #ccc; /* Add a border for better visibility */
+        }
+
+        #searchIcon {
+            margin-left: 180px; /* Add some space to the right of the search icon */
+            margin-right: 5px;
+            font-size: 15px; /* Adjust the size of the search icon */
+        }
+
+        h1 {
+          color: #ffcc00;
+          text-align: center;
+          margin: 0;
+        }
+
+        .back-button {
+          background-color: yellow;
+          padding: 5px 10px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-right: 10px;
+        }
+
+        .back-button:hover {
+          background-color: #ffd700; /* Darker yellow on hover */
+        }
+
+        .back-icon {
+          margin-right: 5px;
+        }
+
+        .navbar {
+          overflow: hidden;
+          text-align: center;
+          padding: 15px;
+          margin-left: 0.3cm;
+          margin-right: 0.3cm;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border-bottom-left-radius: 10px;
+          border-bottom-right-radius: 10px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        }
+
+
+.container {
+    flex: 1; /* Make the container grow to fill available space */
+}
+
+footer {
+    margin-top: auto; /* Push the footer to the bottom */
+}
+
+        h2 {
+            color: #007bff;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .btn-view {
+            margin-top: 10px;
+        }
+
+        .reservation-table {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .selection-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .time-slot-list,
+        .court-list {
+            list-style: none;
+            padding: 0;
+            flex: 1;
+        }
+
+        .time-slot-item,
+        .court-item {
+            margin-bottom: 10px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .time-slot-item:hover,
+        .court-item:hover {
+            background-color: #f2f2f2;
+        }
+
+        .selected {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .footer-bar {
+        background-color: #001f3f;
+        height: 3px;
+        margin: 0;
+    }
+
+    /* Footer content styles */
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; /* Align items vertically in the center */
+    }
+
+    .footer-contact {
+        flex: 1;
+    }
+
+    .footer-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff; /* Text color added for better visibility */
+        margin-bottom: 5px; /* Adjusted margin for better spacing */
+    }
+
+    /* Contact details */
+    .footer-contact p {
+        font-size: 14px;
+        margin: 2px 0; /* Adjusted margin for better spacing */
+        color: #fff; /* Text color added for better visibility */
+    }
+
+    /* Copyright section */
+    .footer-copyright {
+        background-color: #001f3f;
+        color: #fff;
+        text-align: left;
+        font-size: 12px; /* Adjusted font size for copyright text */
+    }
+
+    /* Footer picture container */
+    .footer-picture-container {
+        text-align: right;
+        padding-top: 5px; /* Adjust as needed for spacing */
+    }
+
+    .footer-picture-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px; /* Add border-radius for rounded corners */
+    }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .edit-button, .delete-button {
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .edit-button:hover, .delete-button:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+         .action-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .edit-button,
+    .delete-button,
+    .view-booking-button {
+        padding: 8px;
+        cursor: pointer;
+        border-radius: 5px;
+        display: inline-block; /* Ensure inline-block display */
+    }
+
+    .edit-button:hover,
+    .delete-button:hover,
+    .view-booking-button:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+    </style>
+</head>
+
+<body>
+<header class="navbar">
+    <button class="back-button" onclick="goBack()">
+        <span class="back-icon">&#8592;</span> Back
+    </button>
+    <h1>Manage BOOKING</h1>
+
+</header>
+
+<div class="search-container">
+    <span id="searchIcon">&#128269;</span>
+    <input type="text" id="searchInput" placeholder="Search by name or matric..." oninput="searchUsers()">
+</div>
+
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>User ID</th>
+            <th>Court ID</th>
+            <th>Slot ID</th>
+            <th>Book Date</th>
+            <th>Create Date</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody id="userTableBody">
+        <!-- User rows will be added here dynamically -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Add Bootstrap JS and Popper.js scripts here -->
+<!-- ... -->
+
+<script>
+    function goBack() {
+           // You can replace "admin.html" with the correct path to your admin page
+           window.location.href = "admin.html";
+       }
+       // JavaScript functions to load users and handle actions
+       document.addEventListener("DOMContentLoaded", function () {
+        loadBookings();
+    });
+
+    function loadBookings() {
+        fetch('php/fetch_booking.php')
+            .then(response => response.json())
+            .then(bookings => displayBookings(bookings))
+            .catch(error => console.error('Error fetching bookings:', error));
+    }
+
+    function displayBookings(bookings) {
+        const bookingTableBody = document.getElementById('userTableBody');
+
+        bookings.forEach(booking => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${booking.bookID}</td>
+                <td>${booking.userID}</td>
+                <td>${booking.courtID}</td>
+                <td>${booking.slotID}</td>
+                <td>${booking.bookDate}</td>
+                <td>${booking.createDate}</td>
+                <td class="action-buttons">
+                    <span class="edit-button" onclick="editBooking(${booking.bookID})">Edit</span>
+                    <span class="delete-button" onclick="deleteBooking(${booking.bookID})">Delete</span>
+                </td>
+            `;
+
+            bookingTableBody.appendChild(row);
+        });
+    }
+              function searchUsers() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#userTableBody tr');
+
+            rows.forEach(row => {
+                const name = row.querySelector('td:nth-child(2)').innerText.toLowerCase();
+                const matric = row.querySelector('td:nth-child(3)').innerText.toLowerCase();
+
+                if (name.includes(input) || matric.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+       function editUser(userID) {
+           // Redirect to the manageacc_page.html for the specified user
+           window.location.href = `admin_editU.html?userID=${userID}`;
+       }
+
+       function deleteUser(userID) {
+           // Implement deletion logic (you need to implement this)
+           // Example:
+           // fetch('php/delete_user.php', {
+           //     method: 'POST',
+           //     headers: {
+           //         'Content-Type': 'application/json',
+           //     },
+           //     body: JSON.stringify({ userID: userID }),
+           // })
+           // .then(response => response.json())
+           // .then(result => {
+           //     if (result.success) {
+           //         alert('User deleted successfully.');
+           //         loadUsers(); // Refresh the user list after deletion
+           //     } else {
+           //         alert('Failed to delete user.');
+           //     }
+           // });
+
+           // Dummy data for testing
+           alert(`Delete user with ID ${userID}`);
+       }
+       function viewBooking(userID) {
+               // Redirect to the admin_editB.html for the specified user
+               window.location.href = `admin_editB.html?userID=${userID}`;
+           }
+
+</script>
+
+<footer style="background-color: #001f3f; margin: 0; padding: 0;">
+    <div class="footer-bar"></div>
+    <div class="footer-content" style="padding: 10px 1cm 10px 0;">
+        <div class="footer-contact">
+            <p class="footer-title" style="font-size: 16px; font-weight: bold; color: #fff; margin-left: 1cm;">SPORTS CENTRE</p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">UNIVERSITI UTARA MALAYSIA </p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">06010 Sintok</p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">Kedah Darul Aman, Malaysia</p>
+            <p style="font-size: 14px; color: #fff; margin-left: 1cm;">&phone; +604-928 3560</p>
+        </div>
+
+        <div class="footer-picture-container">
+            <img src="img/footer.png" alt="Footer Picture" title="Footer Picture" style="max-width: 100%; height: auto; border-radius: 5px;">
+        </div>
+    </div>
+
+    <div class="footer-copyright" style="padding: 5px 1cm;">
+        <p style="margin: 0; font-size: 12px;">&copy; 2022 Universiti Utara Malaysia</p>
+    </div>
+</footer>
+</body>
+
+</html>

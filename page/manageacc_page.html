@@ -269,10 +269,47 @@
   }
 
   // Function to handle delete profile action
-  function deleteProfile() {
-    alert("Delete Profile button clicked. Implement your delete profile logic here.");
-    // You can replace the alert with your actual logic for deleting the profile
-  }
+function deleteProfile() {
+    const userID = document.getElementById('user_id').value;
+
+    console.log("Deleting user with userID:", userID);
+
+    // Check if user_id is available
+    if (userID) {
+        // Ask for confirmation
+        const confirmation = window.confirm("Do you really want to delete the account?");
+
+        if (confirmation) {
+            console.log("User confirmed deletion.");
+
+            // Create a FormData object and append the user_id
+            const formData = new FormData();
+            formData.append("userID", userID);
+
+            // Create an AJAX request to delete_user.php
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "php/delete_user.php", true);
+            xhr.onload = function () {
+                console.log("Response from delete_user.php:", xhr.responseText);
+
+                if (xhr.status === 200) {
+                    // Redirect to login page after successful deletion
+                    window.location.href = 'login_page.html';
+                } else {
+                    // Handle errors
+                    console.error("Error: " + xhr.statusText);
+                }
+            };
+
+            xhr.send(formData);
+        } else {
+            console.log("User canceled deletion.");
+        }
+    } else {
+        alert("UserID not provided.");
+    }
+}
+
 
 
     // Function to navigate to the index.html page
