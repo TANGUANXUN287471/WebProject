@@ -259,12 +259,13 @@
           if (managebookingLink) {
             managebookingLink.href = "managebooking_page.html?userID=" + userID;
           }
+
+          // Call viewProfile() automatically when the page loads
+          viewProfile();
         });
 
-      
       </script>
       <div class="edit-delete-buttons">
-        <button onclick="viewProfile()" class="btn btn-primary">View Profile</button>
         <button onclick="editProfile()" class="btn btn-success">Edit Profile</button>
         <button onclick="deleteProfile()" class="btn btn-danger">Delete Profile</button>
     </div>
