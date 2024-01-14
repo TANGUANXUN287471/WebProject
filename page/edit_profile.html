@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+
+        .navbar {
+            overflow: hidden;
+            text-align: center;
+            padding: 15px;
+            margin-left: 0.3cm;
+            margin-right: 0.3cm;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        header {
+            background-color: #050531;
+            color: #ffcc00;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            top: 0;
+            z-index: 999;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #ffcc00;
+            text-align: center;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 100px;
+            margin-bottom: 10px;
+        }
+
+        .center-container {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .user-info-container {
+            width: 50%;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        button {
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .edit-delete-buttons {
+            margin-top: 20px;
+        }
+
+        .edit-delete-buttons button {
+            margin: 5px;
+        }
+
+        .footer-bar {
+            background-color: #001f3f;
+            height: 3px;
+            margin: 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-contact {
+            flex: 1;
+        }
+
+        .footer-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .footer-contact p {
+            font-size: 14px;
+            margin: 2px 0;
+            color: #fff;
+            margin-left: 1cm;
+        }
+
+        .footer-copyright {
+            background-color: #001f3f;
+            color: #fff;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        .footer-picture-container {
+            text-align: right;
+            padding-top: 5px;
+        }
+
+        .footer-picture-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        cancel-button {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Display user information -->
+<header class="navbar">
+    <h1>Edit Your Profile</h1>
+</header>
+
+<div class="center-container">
+    <div class="user-info-container">
+        <p><strong>Name:</strong> <span id="user_name"></span></p>
+        <p><strong>Matric No:</strong> <span id="user_matricNo"></span></p>
+        <p><strong>Phone No:</strong> <input type="text" id="edit_phoneNo"></p>
+        <p><strong>Email:</strong> <input type="text" id="edit_email"></p>
+    </div>
+
+    <!-- Button for updating profile -->
+    <div class="edit-delete-buttons">
+        <input type="hidden" id="user_id" name="user_id" value="">
+        <button onclick="updateProfile()" class="btn btn-primary">Update Profile</button>
+        <button onclick="cancelEdit()" class="btn btn-secondary cancel-button">Cancel</button>
+    </div>
+</div>
+
+<!-- Include your additional HTML content and scripts here -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Function to get a parameter from the URL by name
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        // Get the userID from the URL
+        var userID = getParameterByName('userID');
+
+        // Check if userID is available
+        if (userID) {
+            console.log("UserID:", userID);
+            // Set the userID to the hidden input field
+            document.getElementById('user_id').value = userID;
+            // Now you can use the userID as needed, such as displaying user information
+            // Fetch user information using AJAX
+            fetchUserInfo(userID);
+        } else {
+            console.error("UserID not found in the URL.");
+        }
+    });
+
+    function fetchUserInfo(userID) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "php/user_read.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                try {
+                    var userData = JSON.parse(xhr.responseText);
+                    console.log("User data:", userData);
+
+                    // Check if userData.name and userData.matricNo are not null before updating
+                    if (userData.name !== null && userData.matricNo !== null) {
+                        // Update the displayed user information here
+                        document.getElementById('user_name').innerText = userData.name;
+                        document.getElementById('user_matricNo').innerText = userData.matricNo;
+                    }
+
+                    document.getElementById('edit_phoneNo').value = userData.phoneNo;
+                    document.getElementById('edit_email').value = userData.email;
+                } catch (error) {
+                    console.error("Error parsing JSON: " + error);
+                }
+            } else {
+                console.error("Error fetching user information. Status:", xhr.status);
+            }
+        }
+    };
+    xhr.send("user_id=" + userID);
+}
+
+// Function to update the user profile with a confirmation dialog
+function updateProfile() {
+    const userID = document.getElementById('user_id').value;
+    const newPhoneNo = document.getElementById('edit_phoneNo').value;
+    const newEmail = document.getElementById('edit_email').value;
+
+    // Validate the input
+    if (!isValidPhoneNumber(newPhoneNo) || !isValidEmail(newEmail)) {
+        alert("Please enter valid phone number and email.");
+        alert("Phone No should be 11 digits and Email should be include @ ");
+        return;
+    }
+
+    // Display a confirmation dialog
+    const isConfirmed = confirm("Do you confirm you want to edit?");
+
+    // Check if the user confirmed the action
+    if (isConfirmed) {
+        // Create a FormData object and append the updated data
+        const formData = new FormData();
+        formData.append("user_id", userID);
+        formData.append("phoneNo", newPhoneNo);
+        formData.append("email", newEmail);
+
+        // Create an AJAX request to update the profile
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "php/update_profile.php", true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Handle the successful response
+                try {
+                    // Parse the JSON response if needed
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        // Update successful, redirect back to manageacc_page.html
+                        window.location.href = `manageacc_page.html?userID=${userID}`;
+                    } else {
+                        // Handle update failure
+                        console.error("Update failed:", response.message);
+                    }
+                } catch (error) {
+                    console.error("Error parsing JSON: " + error);
+                }
+            } else {
+                // Handle errors
+                console.error("Error: " + xhr.statusText);
+            }
+        };
+        xhr.send(formData);
+    }
+}
+
+function isValidPhoneNumber(phoneNo) {
+    // Implement your phone number validation logic
+    // For example, you can use a regular expression to check if it matches a valid phone number format
+    return /^[0-9]{11}$/.test(phoneNo);
+}
+ function cancelEdit() {
+            const userID = document.getElementById('user_id').value;
+            // Redirect back to manageacc_page.html
+            window.location.href = `manageacc_page.html?userID=${userID}`;
+        }
+function isValidEmail(email) {
+    // Implement your email validation logic
+    // For example, you can use a regular expression to check if it matches a valid email format
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

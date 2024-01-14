@@ -150,6 +150,14 @@
       bottom: 0;
       width: 100%;
     }
+
+.edit-delete-buttons {
+      margin-top: 20px;
+    }
+
+    .edit-delete-buttons button {
+      margin: 5px;
+    }
   </style>
 </head>
 
@@ -198,8 +206,10 @@
           return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
       </script>
-      <button onclick="viewProfile()" class="btn btn-primary">View Profile</button>
-      <button onclick="navigateToIndex()" class="btn btn-primary">Back</button>
+      <div class="edit-delete-buttons">
+        <button onclick="viewProfile()" class="btn btn-primary">View Profile</button>
+        <button onclick="editProfile()" class="btn btn-success">Edit Profile</button>
+        <button onclick="deleteProfile()" class="btn btn-danger">Delete Profile</button>
     </div>
   </div>
 
@@ -246,6 +256,24 @@
         alert("UserID not provided.");
       }
     }
+// Function to handle edit profile action
+  function editProfile() {
+    const userID = document.getElementById('user_id').value;
+
+    if (userID) {
+      // Redirect to the edit_profile.html page with the user ID as a query parameter
+      window.location.href = `edit_profile.html?userID=${userID}`;
+    } else {
+      alert("UserID not provided.");
+    }
+  }
+
+  // Function to handle delete profile action
+  function deleteProfile() {
+    alert("Delete Profile button clicked. Implement your delete profile logic here.");
+    // You can replace the alert with your actual logic for deleting the profile
+  }
+
 
     // Function to navigate to the index.html page
     function navigateToIndex() {
