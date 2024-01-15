@@ -1,4 +1,4 @@
-global$conn; <!-- view_reservations.php -->
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -22,6 +22,22 @@
         .btn-view {
             margin-top: 10px;
         }
+        .back-button {
+            background-color: yellow;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .back-button:hover {
+            background-color: #ffd700; /* Darker yellow on hover */
+        }
+
+        .back-icon {
+            margin-right: 5px;
+        }
 
         .modal {
             display: none;
@@ -97,6 +113,7 @@
 
 <div class="container">
     <h2 class="mt-3 mb-3">Admin Page</h2>
+    <button class="btn btn-secondary back-button" onclick="goBack()">Back</button>
 
     <form id="reservationForm">
         <div class="form-row align-items-center">
@@ -137,216 +154,221 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 
 <script>
-    function viewReservations() {
-        // Get form data
-        var formData = new FormData(document.getElementById("reservationForm"));
+    function goBack() {
 
-        // Send AJAX request to view_reservations.php
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "php/view_reservation.php", true);
+          // You can replace "admin.html" with the correct path to your admin page
+          window.location.href = "admin.html";
+      }
+   function viewReservations() {
+       // Get form data
+       var formData = new FormData(document.getElementById("reservationForm"));
 
-        // Set up a callback function to handle the response
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                document.getElementById("reservationTable").innerHTML = xhr.responseText;
-            } else {
-                console.error("Request failed. Status: " + xhr.status);
-            }
-        };
+       // Send AJAX request to view_reservations.php
+       var xhr = new XMLHttpRequest();
+       xhr.open("POST", "php/view_reservation.php", true);
 
-        // Set up a callback function to handle network errors
-        xhr.onerror = function () {
-            console.error("Network error occurred");
-        };
+       // Set up a callback function to handle the response
+       xhr.onload = function () {
+           if (xhr.status === 200) {
+               document.getElementById("reservationTable").innerHTML = xhr.responseText;
+           } else {
+               console.error("Request failed. Status: " + xhr.status);
+           }
+       };
 
-        // Send the request
-        xhr.send(formData);
-    }
+       // Set up a callback function to handle network errors
+       xhr.onerror = function () {
+           console.error("Network error occurred");
+       };
 
-    function editReservation() {
-        // Get form data
-        var formData = new FormData(document.getElementById("reservationForm"));
+       // Send the request
+       xhr.send(formData);
+   }
 
-        // Send AJAX request to edit_reservation.php
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "php/edit_reservation.php", true);
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // Parse JSON response
-                var response = JSON.parse(xhr.responseText);
+   function editReservation() {
+       // Get form data
+       var formData = new FormData(document.getElementById("reservationForm"));
 
-                // Check if the response status is 'success'
-                if (response.status === 'success') {
-                    // Display a modal with multi-select dropdowns for time slots and court numbers
-                    var modal = document.createElement("div");
-                    modal.classList.add("modal");
-                    modal.innerHTML = `
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal()">&times;</span>
-                    <h2>Select Time Slots and Court Numbers</h2>
-                    <div class="selection-container">
-                        <ul class="time-slot-list">
-                            ${response.timeSlots.map(slot => `<li class="time-slot-item" data-slot-id="${slot.slotID}" onclick="toggleSelection(this)">${slot.startTime} - ${slot.endTime}</li>`).join('')}
-                        </ul>
-                        <ul class="court-list">
-                            ${response.courts.map(court => `<li class="court-item" data-court-id="${court.courtID}" onclick="toggleSelection(this)">Court ${court.courtNo}</li>`).join('')}
-                        </ul>
-                    </div>
-                    <button type="button" onclick="submitEditForm()">Submit</button>
-                </div>
-            `;
+       // Send AJAX request to edit_reservation.php
+       var xhr = new XMLHttpRequest();
+       xhr.open("POST", "php/edit_reservation.php", true);
+       xhr.onload = function () {
+           if (xhr.status === 200) {
+               // Parse JSON response
+               var response = JSON.parse(xhr.responseText);
 
-                    // Append the modal to the document body
-                    document.body.appendChild(modal);
+               // Check if the response status is 'success'
+               if (response.status === 'success') {
+                   // Display a modal with multi-select dropdowns for time slots and court numbers
+                   var modal = document.createElement("div");
+                   modal.classList.add("modal");
+                   modal.innerHTML = `
+               <div class="modal-content">
+                   <span class="close" onclick="closeModal()">&times;</span>
+                   <h2>Select Time Slots and Court Numbers</h2>
+                   <div class="selection-container">
+                       <ul class="time-slot-list">
+                           ${response.timeSlots.map(slot => `<li class="time-slot-item" data-slot-id="${slot.slotID}" onclick="toggleSelection(this)">${slot.startTime} - ${slot.endTime}</li>`).join('')}
+                       </ul>
+                       <ul class="court-list">
+                           ${response.courts.map(court => `<li class="court-item" data-court-id="${court.courtID}" onclick="toggleSelection(this)">Court ${court.courtNo}</li>`).join('')}
+                       </ul>
+                   </div>
+                   <button type="button" onclick="submitEditForm()">Submit</button>
+               </div>
+           `;
 
-                    // Display the modal
-                    modal.style.display = "block";
-                } else {
-                    // Display an error message
-                    alert(response.message);
-                }
-            }
-        };
-        xhr.send(formData);
-    }
+                   // Append the modal to the document body
+                   document.body.appendChild(modal);
 
-    function toggleSelection(element) {
-        element.classList.toggle("selected");
-    }
+                   // Display the modal
+                   modal.style.display = "block";
+               } else {
+                   // Display an error message
+                   alert(response.message);
+               }
+           }
+       };
+       xhr.send(formData);
+   }
 
-    function closeModal() {
-        var modal = document.querySelector(".modal");
-        if (modal) {
-            modal.remove();
-        }
-    }
+   function toggleSelection(element) {
+       element.classList.toggle("selected");
+   }
 
-    function submitEditForm() {
-        // Get selected time slots and court numbers
-        var selectedTimeSlots = document.querySelectorAll('.time-slot-item.selected');
-        var selectedCourts = document.querySelectorAll('.court-item.selected');
+   function closeModal() {
+       var modal = document.querySelector(".modal");
+       if (modal) {
+           modal.remove();
+       }
+   }
 
-        // Extract IDs from selected items
-        var selectedSlotIDs = Array.from(selectedTimeSlots).map(item => item.dataset.slotId);
-        var selectedCourtIDs = Array.from(selectedCourts).map(item => item.dataset.courtId);
+   function submitEditForm() {
+       // Get selected time slots and court numbers
+       var selectedTimeSlots = document.querySelectorAll('.time-slot-item.selected');
+       var selectedCourts = document.querySelectorAll('.court-item.selected');
 
-        console.log("Selected Slot IDs:", selectedSlotIDs);
-        console.log("Selected Court IDs:", selectedCourtIDs);
+       // Extract IDs from selected items
+       var selectedSlotIDs = Array.from(selectedTimeSlots).map(item => item.dataset.slotId);
+       var selectedCourtIDs = Array.from(selectedCourts).map(item => item.dataset.courtId);
 
-        // Check if at least one time slot and one court number is selected
-        if (!selectedSlotIDs.length || !selectedCourtIDs.length) {
-            console.error("Please select at least one time slot and one court number.");
-            alert("Please select at least one time slot and one court number.");
-            return;
-        }
+       console.log("Selected Slot IDs:", selectedSlotIDs);
+       console.log("Selected Court IDs:", selectedCourtIDs);
 
-        // Add selected slots and courts to the form data
-        var formData = new FormData(document.getElementById("reservationForm"));
-        formData.append("selectedSlots", JSON.stringify(selectedSlotIDs));
-        formData.append("selectedCourts", JSON.stringify(selectedCourtIDs));
+       // Check if at least one time slot and one court number is selected
+       if (!selectedSlotIDs.length || !selectedCourtIDs.length) {
+           console.error("Please select at least one time slot and one court number.");
+           alert("Please select at least one time slot and one court number.");
+           return;
+       }
 
-        // Send AJAX request to insert_booking.php
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "php/insert_bookings.php", true);
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // Handle the response as needed
-                console.log(xhr.responseText);
-                // Close the modal after successful submission
-                closeModal();
-            } else {
-                console.error("Request failed. Status: " + xhr.status);
-            }
-        };
-        xhr.send(formData);
-    }
+       // Add selected slots and courts to the form data
+       var formData = new FormData(document.getElementById("reservationForm"));
+       formData.append("selectedSlots", JSON.stringify(selectedSlotIDs));
+       formData.append("selectedCourts", JSON.stringify(selectedCourtIDs));
 
-    function deleteReservation() {
-        // Get form data
-        var formData = new FormData(document.getElementById("reservationForm"));
+       // Send AJAX request to insert_booking.php
+       var xhr = new XMLHttpRequest();
+       xhr.open("POST", "php/insert_bookings.php", true);
+       xhr.onload = function () {
+           if (xhr.status === 200) {
+               // Handle the response as needed
+               console.log(xhr.responseText);
+               // Close the modal after successful submission
+               closeModal();
+           } else {
+               console.error("Request failed. Status: " + xhr.status);
+           }
+       };
+       xhr.send(formData);
+   }
 
-        // Send AJAX request to delete_reservation.php
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "php/edit_reservation.php", true);
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // Parse JSON response
-                var response = JSON.parse(xhr.responseText);
+   function deleteReservation() {
+       // Get form data
+       var formData = new FormData(document.getElementById("reservationForm"));
 
-                // Check if the response status is 'success'
-                if (response.status === 'success') {
-                    // Display a modal with multi-select dropdowns for time slots and court numbers
-                    var modal = document.createElement("div");
-                    modal.classList.add("modal");
-                    modal.innerHTML = `
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal()">&times;</span>
-                    <h2>Select Time Slots and Court Numbers to Delete</h2>
-                    <div class="selection-container">
-                        <ul class="time-slot-list">
-                            ${response.timeSlots.map(slot => `<li class="time-slot-item" data-slot-id="${slot.slotID}" onclick="toggleSelection(this)">${slot.startTime} - ${slot.endTime}</li>`).join('')}
-                        </ul>
-                        <ul class="court-list">
-                            ${response.courts.map(court => `<li class="court-item" data-court-id="${court.courtID}" onclick="toggleSelection(this)">Court ${court.courtNo}</li>`).join('')}
-                        </ul>
-                    </div>
-                    <button type="button" onclick="submitDeleteForm()">Delete</button>
-                </div>
-            `;
+       // Send AJAX request to delete_reservation.php
+       var xhr = new XMLHttpRequest();
+       xhr.open("POST", "php/edit_reservation.php", true);
+       xhr.onload = function () {
+           if (xhr.status === 200) {
+               // Parse JSON response
+               var response = JSON.parse(xhr.responseText);
 
-                    // Append the modal to the document body
-                    document.body.appendChild(modal);
+               // Check if the response status is 'success'
+               if (response.status === 'success') {
+                   // Display a modal with multi-select dropdowns for time slots and court numbers
+                   var modal = document.createElement("div");
+                   modal.classList.add("modal");
+                   modal.innerHTML = `
+               <div class="modal-content">
+                   <span class="close" onclick="closeModal()">&times;</span>
+                   <h2>Select Time Slots and Court Numbers to Delete</h2>
+                   <div class="selection-container">
+                       <ul class="time-slot-list">
+                           ${response.timeSlots.map(slot => `<li class="time-slot-item" data-slot-id="${slot.slotID}" onclick="toggleSelection(this)">${slot.startTime} - ${slot.endTime}</li>`).join('')}
+                       </ul>
+                       <ul class="court-list">
+                           ${response.courts.map(court => `<li class="court-item" data-court-id="${court.courtID}" onclick="toggleSelection(this)">Court ${court.courtNo}</li>`).join('')}
+                       </ul>
+                   </div>
+                   <button type="button" onclick="submitDeleteForm()">Delete</button>
+               </div>
+           `;
 
-                    // Display the modal
-                    modal.style.display = "block";
-                } else {
-                    // Display an error message
-                    alert(response.message);
-                }
-            }
-        };
-        xhr.send(formData);
-    }
+                   // Append the modal to the document body
+                   document.body.appendChild(modal);
 
-    function submitDeleteForm() {
-        // Get selected time slots and court numbers
-        var selectedTimeSlots = document.querySelectorAll('.time-slot-item.selected');
-        var selectedCourts = document.querySelectorAll('.court-item.selected');
+                   // Display the modal
+                   modal.style.display = "block";
+               } else {
+                   // Display an error message
+                   alert(response.message);
+               }
+           }
+       };
+       xhr.send(formData);
+   }
 
-        // Extract IDs from selected items
-        var selectedSlotIDs = Array.from(selectedTimeSlots).map(item => item.dataset.slotId);
-        var selectedCourtIDs = Array.from(selectedCourts).map(item => item.dataset.courtId);
+   function submitDeleteForm() {
+       // Get selected time slots and court numbers
+       var selectedTimeSlots = document.querySelectorAll('.time-slot-item.selected');
+       var selectedCourts = document.querySelectorAll('.court-item.selected');
 
-        console.log("Selected Slot IDs to Delete:", selectedSlotIDs);
-        console.log("Selected Court IDs to Delete:", selectedCourtIDs);
+       // Extract IDs from selected items
+       var selectedSlotIDs = Array.from(selectedTimeSlots).map(item => item.dataset.slotId);
+       var selectedCourtIDs = Array.from(selectedCourts).map(item => item.dataset.courtId);
 
-        // Check if at least one time slot and one court number is selected
-        if (!selectedSlotIDs.length || !selectedCourtIDs.length) {
-            console.error("Please select at least one time slot and one court number to delete.");
-            alert("Please select at least one time slot and one court number to delete.");
-            return;
-        }
+       console.log("Selected Slot IDs to Delete:", selectedSlotIDs);
+       console.log("Selected Court IDs to Delete:", selectedCourtIDs);
 
-        // Add selected slots and courts to the form data
-        var formData = new FormData(document.getElementById("reservationForm"));
-        formData.append("selectedSlots", JSON.stringify(selectedSlotIDs));
-        formData.append("selectedCourts", JSON.stringify(selectedCourtIDs));
+       // Check if at least one time slot and one court number is selected
+       if (!selectedSlotIDs.length || !selectedCourtIDs.length) {
+           console.error("Please select at least one time slot and one court number to delete.");
+           alert("Please select at least one time slot and one court number to delete.");
+           return;
+       }
 
-        // Send AJAX request to delete_reservation.php
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "php/delete_reservation.php", true);
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // Handle the response as needed
-                console.log(xhr.responseText);
-                // Close the modal after successful deletion
-                closeModal();
-            } else {
-                console.error("Request failed. Status: " + xhr.status);
-            }
-        };
-        xhr.send(formData);
-    }
+       // Add selected slots and courts to the form data
+       var formData = new FormData(document.getElementById("reservationForm"));
+       formData.append("selectedSlots", JSON.stringify(selectedSlotIDs));
+       formData.append("selectedCourts", JSON.stringify(selectedCourtIDs));
+
+       // Send AJAX request to delete_reservation.php
+       var xhr = new XMLHttpRequest();
+       xhr.open("POST", "php/delete_reservation.php", true);
+       xhr.onload = function () {
+           if (xhr.status === 200) {
+               // Handle the response as needed
+               console.log(xhr.responseText);
+               // Close the modal after successful deletion
+               closeModal();
+           } else {
+               console.error("Request failed. Status: " + xhr.status);
+           }
+       };
+       xhr.send(formData);
+   }
 </script>
 
 </body>
